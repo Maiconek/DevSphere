@@ -1,5 +1,6 @@
 package pl.marcin.baranowski.devsphere_backend.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import pl.marcin.baranowski.devsphere_backend.exceptions.ResourceNotFoundException;
 import pl.marcin.baranowski.devsphere_backend.model.Project;
@@ -24,12 +25,13 @@ public class ProjectService {
     }
 
     public Project getSingleProject(Long id) {
-        return projectRepository.findById(id).orElseGet(null);
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project does not exist with id: " + id));
     }
 
     public Project updateProject(Long id, Project project) {
         Project updatedProject = projectRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Project not exist with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Project does not exist with id: " + id));
 
         updatedProject.setTitle(project.getTitle());
         updatedProject.setDescription(project.getDescription());

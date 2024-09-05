@@ -5,7 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.marcin.baranowski.devsphere_backend.model.Project;
+import pl.marcin.baranowski.devsphere_backend.model.ProjectTag;
 import pl.marcin.baranowski.devsphere_backend.repository.ProjectRepository;
+import pl.marcin.baranowski.devsphere_backend.repository.ProjectTagRepository;
 
 @SpringBootApplication
 public class DevsphereBackendApplication {
@@ -15,7 +17,8 @@ public class DevsphereBackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository) {
+	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository,
+											   ProjectTagRepository projectTagRepository) {
 		return args -> {
 			var project = Project.builder()
 					.title("DevSphere")
@@ -24,6 +27,11 @@ public class DevsphereBackendApplication {
 					.link("https://github.com/Maiconek/DevSphere")
 					.build();
 			projectRepository.save(project);
+
+			var tag = ProjectTag.builder()
+					.name("Java")
+					.build();
+			projectTagRepository.save(tag);
 		};
 	}
 }

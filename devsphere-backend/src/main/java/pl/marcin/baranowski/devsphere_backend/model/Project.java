@@ -27,6 +27,6 @@ public class Project {
     private UserEntity userEntity;
 
     @OneToMany(mappedBy = "project")
-    private List<Tag> tags;
+    private List<ProjectTag> tags;
 
 }
