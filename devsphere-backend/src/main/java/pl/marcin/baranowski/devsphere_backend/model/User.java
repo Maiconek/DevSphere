@@ -13,7 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class UserEntity {
+@Table(name = "app_user")
+public class User {
     @Id
     @GeneratedValue
     private Long id;
@@ -25,9 +26,9 @@ public class UserEntity {
     private String bio;
     private String company;
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "user")
     private List<Project> projects;
 
-    @OneToMany(mappedBy = "userEntity")
+    @OneToMany(mappedBy = "user")
     private List<Skill> skills;
 }

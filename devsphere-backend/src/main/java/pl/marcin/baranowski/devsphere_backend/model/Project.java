@@ -24,7 +24,7 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private User user;
 
     @OneToMany(mappedBy = "project")
     private List<ProjectTag> tags;
