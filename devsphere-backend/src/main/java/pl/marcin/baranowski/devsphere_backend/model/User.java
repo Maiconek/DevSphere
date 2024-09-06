@@ -1,5 +1,6 @@
 package pl.marcin.baranowski.devsphere_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +28,10 @@ public class User {
     private String company;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Project> projects;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Skill> skills;
 }

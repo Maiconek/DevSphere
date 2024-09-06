@@ -27,18 +27,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable) // wylacznie csrf
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register", "api/auth/login").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/auth/register", "api/auth/login").permitAll() // endpointy nie podlegajace autentykacji
+                        .anyRequest().authenticated() // cała reszta podlega
                 )
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Używamy stateless (dla JWT lub API REST)
-                .httpBasic(withDefaults());
-        return http.build();
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Ustawia aplikację na "stateless" (bezstanową), czyli brak przechowywania sesji (np. dla JWT)
+                .httpBasic(withDefaults()); // Ustawia HTTP Basic Authentication jako metodę uwierzytelnienia
+        return http.build(); // Buduje obiekt SecurityFilterChain na podstawie danej konfiguracji
     }
 
-    @Bean
+    @Bean // Komponent odpowiedzialny za zarządzanie procesem uwierzytelniania użytkownika
+    // na podstawie dostarczonych danych (np. login, hasło).
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();  // Nowy sposób uzyskania AuthenticationManager
     }

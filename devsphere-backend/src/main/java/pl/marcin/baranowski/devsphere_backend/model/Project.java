@@ -1,5 +1,7 @@
 package pl.marcin.baranowski.devsphere_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,9 +26,11 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @OneToMany(mappedBy = "project")
+    @JsonManagedReference
     private List<ProjectTag> tags;
 
 }
