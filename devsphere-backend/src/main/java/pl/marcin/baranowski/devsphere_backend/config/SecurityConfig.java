@@ -13,6 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -35,6 +41,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Ustawia aplikację na "stateless" (bezstanową), czyli brak przechowywania sesji (np. dla JWT)
                 .httpBasic(withDefaults()); // Ustawia HTTP Basic Authentication jako metodę uwierzytelnienia
+//                .cors(AbstractHttpConfigurer::disable); // wyłacza CORS
         return http.build(); // Buduje obiekt SecurityFilterChain na podstawie danej konfiguracji
     }
 
