@@ -1,6 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Login = () => {
+    const [user, setUser] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -18,6 +22,8 @@ const Login = () => {
         let data = await response.json()
         console.log("data: ", data)
         console.log("response: ", response)
+        setUser(data)
+        setIsLoggedIn(true)
     }
 
     return (
@@ -35,6 +41,10 @@ const Login = () => {
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            {isLoggedIn
+            ? <p>{user.username}</p>
+            : <p>Nie ma nic</p>
+            }
         </>
     )
 }
