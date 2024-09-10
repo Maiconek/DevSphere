@@ -1,30 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-    const [user, setUser] = useState('')
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    
-
-    let loginUser = async (e) => {
-        e.preventDefault()
-        console.log("cojest kurwa")
-        let response = await fetch('http://localhost:8080/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'username': e.target.username.value,
-                'password': e.target.password.value,
-            })
-        })
-        let data = await response.json()
-        console.log("data: ", data)
-        console.log("response: ", response)
-        setUser(data)
-        setIsLoggedIn(true)
-    }
+    const {loginUser} = useContext(AuthContext)
 
     return (
         <>
@@ -41,10 +21,6 @@ const Login = () => {
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            {isLoggedIn
-            ? <p>{user.username}</p>
-            : <p>Nie ma nic</p>
-            }
         </>
     )
 }

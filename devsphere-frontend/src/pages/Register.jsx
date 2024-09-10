@@ -1,33 +1,16 @@
-import React from "react";
+import React, {useState, useContext} from "react";
+import { AuthContext } from "../context/AuthContext";
+import { Link, Navigate } from "react-router-dom";
 
 const Register = () => {
-    
-    let registerUser = async (e) => {
-        e.preventDefault()
-        console.log("cojest kurwa")
-        let response = await fetch('http://localhost:8080/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'username': e.target.username.value,
-                'password': e.target.password.value,
-                'firstName': e.target.firstname.value,
-                'lastName': e.target.lastname.value,
-                'email': e.target.email.value
-            })
-        })
-        let data = await response.json()
-        console.log("data: ", data)
-        console.log("response: ", response)
-    }
+
+    const {registerUser} = useContext(AuthContext)
+
 
     return (
         <>
             <h1>Register</h1>
             <form onSubmit={registerUser}>
-                
                 <div className="mb-3">
                     <label htmlFor="exampleInputUsername1" className="form-label">Username</label>
                     <input type="text" className="form-control" id="exampleInputUsername" name="username"/>
