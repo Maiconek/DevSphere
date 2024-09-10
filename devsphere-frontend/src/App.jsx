@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { AuthContext } from './context/AuthContext'
 import LoggedInTest from './components/LoggedInTest'
 import LoggedOutTest from './components/LoggedOutTest'
+import ProjectForm from './pages/ProjectForm'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           }
           <Route path="/login" element={<Login />} />            
           <Route path="/register" element={<Register />} />
+          <Route path="/project-form" element={<ProjectForm />} />
         </Routes>
       </BrowserRouter>
     </>  

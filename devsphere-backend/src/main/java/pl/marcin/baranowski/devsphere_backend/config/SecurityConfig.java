@@ -33,7 +33,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable) // wylacznie csrf
+        http
+                .csrf(AbstractHttpConfigurer::disable) // wylacznie csrf
+                .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/register", "api/auth/login").permitAll() // endpointy nie podlegajace autentykacji
                         .anyRequest().authenticated() // cała reszta podlega
@@ -41,7 +43,6 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Ustawia aplikację na "stateless" (bezstanową), czyli brak przechowywania sesji (np. dla JWT)
                 .httpBasic(withDefaults()); // Ustawia HTTP Basic Authentication jako metodę uwierzytelnienia
-//                .cors(AbstractHttpConfigurer::disable); // wyłacza CORS
         return http.build(); // Buduje obiekt SecurityFilterChain na podstawie danej konfiguracji
     }
 
