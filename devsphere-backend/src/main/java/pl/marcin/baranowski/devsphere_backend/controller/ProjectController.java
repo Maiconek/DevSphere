@@ -7,6 +7,7 @@ import pl.marcin.baranowski.devsphere_backend.service.ProjectService;
 import java.util.List;
 
 @RestController
+@RequestMapping("api/v1")
 public class ProjectController {
     private final ProjectService projectService;
 
@@ -22,6 +23,11 @@ public class ProjectController {
     @GetMapping("/projects/{id}")
     public Project getSingleProject(@PathVariable Long id) {
         return projectService.getSingleProject(id);
+    }
+
+    @GetMapping("/projects/user/{id}")
+    public List<Project> getProjectsByUserId(@PathVariable Long id) {
+        return projectService.getProjectsByUserId(id);
     }
 
     @PostMapping("/projects")

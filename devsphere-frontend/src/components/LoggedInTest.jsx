@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import ProjectsList from "./ProjectsList";
 
 const LoggedInTest = () => {
 
@@ -13,6 +14,7 @@ const LoggedInTest = () => {
                 <Link to="/project-form"><button className="btn btn-success m-2">Add project</button></Link>
                 <button className="btn btn-primary m-2" onClick={logoutUser}>Logout</button>
             </div>
+            <ProjectsList />
         </div>
     )
 }

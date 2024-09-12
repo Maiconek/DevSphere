@@ -1,9 +1,11 @@
 import React, {useContext, useEffect} from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const ProjectForm = () => {
 
     const {user} = useContext(AuthContext)
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(user.username + " " + user.password)
@@ -17,7 +19,7 @@ const ProjectForm = () => {
         // const basicAuth = 'Basic ' + btoa(username + ':' + password); // Kodowanie danych uwierzytelniających
 
         try {
-            let response = await fetch('http://localhost:8080/projects', {
+            let response = await fetch('http://localhost:8080/api/v1/projects', {
                 'method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',
@@ -33,6 +35,8 @@ const ProjectForm = () => {
             })
             let data = await response.json();
             console.log('Data: ', data);
+            navigate("/")
+
         }
         catch (error) {
             console.error('Błąd połączenia:', error);
