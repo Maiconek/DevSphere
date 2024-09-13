@@ -15,10 +15,9 @@ public class UserService {
     private final UserMapper userMapper;
 
 
-    public UserDto register(User user) {
+    public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return userMapper.toUserDto(user);
+        return userRepository.save(user);
     }
 
     public User findByUsername(String username) {

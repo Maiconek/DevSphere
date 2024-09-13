@@ -7,6 +7,7 @@ import pl.marcin.baranowski.devsphere_backend.service.ProjectTagService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1")
 public class ProjectTagController {
     private final ProjectTagService projectTagService;
 

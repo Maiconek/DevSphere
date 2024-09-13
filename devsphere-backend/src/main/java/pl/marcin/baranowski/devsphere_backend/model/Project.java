@@ -1,6 +1,7 @@
 package pl.marcin.baranowski.devsphere_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,8 +30,17 @@ public class Project {
     @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy = "project")
-    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "projects_tags",
+            joinColumns = {
+                    @JoinColumn(name = "project_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "tag_id")
+            }
+    )
+    @JsonIgnoreProperties("projects")
     private List<ProjectTag> tags;
 
 }

@@ -1,23 +1,52 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const ProjectForm = () => {
 
     const {user} = useContext(AuthContext)
+    const [tags, setTags] = useState([])
+    const [selectedTags, setSelectedTags] = useState([]);
+
+    const username = user.username;
+    const password = user.password; 
+    
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(user.username + " " + user.password)
+        // console.log(user.username + " " + user.password)
+        fetchTags()
+        console.log(selectedTags)
     })
+
+    let fetchTags = async () => {
+        try {
+            let response = await fetch('http://localhost:8080/api/v1/tags', {
+                'method': 'GET',
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Basic " + btoa(username + ":" + password),
+                },
+            })
+            let data = await response.json();
+            // console.log('Data: ', data);
+            setTags(data);
+        }
+        catch (error) {
+            console.error("Error, ", error)
+        }
+    }
+
+    const handleTagChange = (tag) => {
+        if (selectedTags.find(t => t.id === tag.id)) {
+            setSelectedTags(selectedTags.filter(t => t.id !== tag.id)); // usuń tag
+        } else {
+            setSelectedTags([...selectedTags, tag]); // dodaj tag
+        }
+    };
 
     let createProject = async (e) => {
         e.preventDefault()
-
-        const username = user.username;
-        const password = user.password; 
-        // const basicAuth = 'Basic ' + btoa(username + ':' + password); // Kodowanie danych uwierzytelniających
-
         try {
             let response = await fetch('http://localhost:8080/api/v1/projects', {
                 'method': 'POST',
@@ -29,7 +58,8 @@ const ProjectForm = () => {
                     'title': e.target.title.value,
                     'shortIntro': e.target.shortIntro.value,
                     'description': e.target.description.value,
-                    'link': e.target.link.value
+                    'link': e.target.link.value,
+                    'tags': selectedTags
                     // 'user': user
                 }),
             })
@@ -67,6 +97,21 @@ const ProjectForm = () => {
                     <label htmlFor="exampleInputLink1" className="form-label">Link</label>
                     <input type="text" className="form-control" id="exampleInputLink" name="link"/>
                 </div>
+
+                <div>
+                <label>Tagi:</label>
+                {tags.map(tag => (
+                    <div key={tag.id}>
+                        <input 
+                            type="checkbox" 
+                            value={tag.id} 
+                            checked={selectedTags.some(t => t.id === tag.id)} 
+                            onChange={() => handleTagChange(tag)} 
+                        />
+                        {tag.name}
+                    </div>
+                ))}
+            </div>
                 
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>

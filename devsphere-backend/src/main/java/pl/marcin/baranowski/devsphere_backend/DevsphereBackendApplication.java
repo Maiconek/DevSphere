@@ -32,6 +32,21 @@ public class DevsphereBackendApplication {
 					.name("Java")
 					.build();
 			projectTagRepository.save(tag);
+
+			var tag2 = ProjectTag.builder()
+					.name("Spring")
+					.build();
+			projectTagRepository.save(tag2);
+
+			var tag3 = ProjectTag.builder()
+					.name("React")
+					.build();
+			projectTagRepository.save(tag3);
+
+			var tag4 = ProjectTag.builder()
+					.name("JavaScript")
+					.build();
+			projectTagRepository.save(tag4);
 		};
 	}
 }

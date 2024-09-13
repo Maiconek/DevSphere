@@ -33,13 +33,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody User user) {
+    public ResponseEntity<User> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        var loadedUser = userService.findByUsername(user.getUsername());
-        var userDto = userMapper.toUserDto(loadedUser);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
