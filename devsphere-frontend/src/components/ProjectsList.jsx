@@ -30,7 +30,7 @@ const ProjectsList = () => {
     }
 
     return (
-        <div className="container-fluid">
+        <div className="container">
             <div className="row">
                 {projects.map((item) => (
                     <ProjectCard

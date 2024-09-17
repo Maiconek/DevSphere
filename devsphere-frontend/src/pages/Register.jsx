@@ -8,7 +8,7 @@ const Register = () => {
 
 
     return (
-        <>
+        <div className="d-flex flex-column align-items-center">
             <h1>Register</h1>
             <form onSubmit={registerUser}>
                 <div className="mb-3">
@@ -36,7 +36,7 @@ const Register = () => {
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <Link to='/login'><p className="m-3">Have an account? Login here</p></Link>
             </form>
-        </>
+        </div>
     )
 }
 

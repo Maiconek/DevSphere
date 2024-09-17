@@ -8,6 +8,8 @@ import pl.marcin.baranowski.devsphere_backend.exceptions.ResourceNotFoundExcepti
 import pl.marcin.baranowski.devsphere_backend.model.User;
 import pl.marcin.baranowski.devsphere_backend.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -19,6 +21,13 @@ public class UserService {
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toUserDto)
+                .toList();
     }
 
 //    public User findByUsername(String username) {

@@ -7,7 +7,7 @@ const Login = () => {
     const {loginUser} = useContext(AuthContext)
 
     return (
-        <>
+        <div className="d-flex flex-column align-items-center">
             <h1>Login</h1>
                 <form onSubmit={loginUser}>
                     <div className="mb-3">
@@ -23,7 +23,7 @@ const Login = () => {
                     <button type="submit" className="btn btn-primary">Submit</button>
                     <Link to='/register'><p className="m-3">Don't have an account? Register here</p></Link>
             </form>
-        </>
+        </div>
     )
 }
 

@@ -76,7 +76,7 @@ const ProjectForm = () => {
 
 
     return (
-        <>
+        <div className="d-flex flex-column align-items-center">
             <h1>Dodaj projekt</h1>
             <form onSubmit={createProject}>
                 <div className="mb-3">
@@ -116,7 +116,7 @@ const ProjectForm = () => {
                 
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-        </>
+        </div>
     )
 }
 
