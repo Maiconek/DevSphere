@@ -28,7 +28,7 @@ public class ProjectService {
     public Project saveProject(Project project) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
-        User owner = userRepository.findByUsername(currentUsername);
+        User owner = userRepository.findByEmail(currentUsername).orElseThrow(() -> new RuntimeException("User does not exist"));
         if (owner == null) {
             throw new RuntimeException("User not found");
         }

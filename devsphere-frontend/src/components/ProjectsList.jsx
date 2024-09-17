@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 
 const ProjectsList = () => {
 
-    const {user} = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
     const [projects, setProjects] = useState([])
 
     useEffect(() => {
@@ -12,14 +12,12 @@ const ProjectsList = () => {
     }, [])
 
     const getProjects = async () => {
-        const username = user.username;
-        const password = user.password; 
         try {
             let response = await fetch('http://localhost:8080/api/v1/projects', {
                 'method': 'GET',
                 'headers': {
                     'Content-Type': 'application/json',
-                    'Authorization': "Basic " + btoa(username + ":" + password),
+                    'Authorization': "Bearer " + token.access_token,
                 },
             })
             let data = await response.json()

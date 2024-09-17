@@ -4,16 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 const ProjectForm = () => {
 
-    const {user} = useContext(AuthContext)
+    const {token} = useContext(AuthContext)
     const [tags, setTags] = useState([])
     const [selectedTags, setSelectedTags] = useState([]);
 
-    const username = user.username;
-    const password = user.password; 
+    // const username = user.username;
+    // const password = user.password; 
     
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log("Token ", token)
         // console.log(user.username + " " + user.password)
         fetchTags()
         console.log(selectedTags)
@@ -25,7 +26,7 @@ const ProjectForm = () => {
                 'method': 'GET',
                 'headers': {
                     'Content-Type': 'application/json',
-                    'Authorization': "Basic " + btoa(username + ":" + password),
+                    'Authorization': 'Bearer ' + token.access_token,
                 },
             })
             let data = await response.json();
@@ -52,7 +53,7 @@ const ProjectForm = () => {
                 'method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',
-                    'Authorization': "Basic " + btoa(username + ":" + password),
+                    'Authorization': "Bearer " + token.access_token,
                 },
                 'body': JSON.stringify({
                     'title': e.target.title.value,

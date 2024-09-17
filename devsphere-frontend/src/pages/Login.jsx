@@ -11,8 +11,9 @@ const Login = () => {
             <h1>Login</h1>
                 <form onSubmit={loginUser}>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputUsername1" className="form-label">Username</label>
-                        <input type="text" className="form-control" id="exampleInputUsername" name="username"/>
+                        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"/>
+                        <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                     </div>
 
                     <div className="mb-3">
@@ -20,6 +21,7 @@ const Login = () => {
                         <input type="password" className="form-control" id="exampleInputPassword1" name="password"/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
+                    <Link to='/register'><p className="m-3">Don't have an account? Register here</p></Link>
             </form>
         </>
     )
