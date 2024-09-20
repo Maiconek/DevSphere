@@ -1,9 +1,11 @@
 package pl.marcin.baranowski.devsphere_backend.controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.marcin.baranowski.devsphere_backend.model.Project;
 import pl.marcin.baranowski.devsphere_backend.service.ProjectService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -31,13 +33,16 @@ public class ProjectController {
     }
 
     @PostMapping("/projects")
-    public Project saveProject(@RequestBody Project project) {
-        return projectService.saveProject(project);
+    public Project saveProject(@RequestPart Project project, @RequestPart MultipartFile imageFile) throws IOException {
+        return projectService.saveProject(project, imageFile);
     }
 
     @PutMapping("/projects/{id}")
-    public Project updateProjects(@PathVariable Long id, @RequestBody Project project) {
-        return projectService.updateProject(id, project);
+    public Project updateProjects(
+            @PathVariable Long id,
+            @RequestPart Project project,
+            @RequestPart MultipartFile imageFile) throws IOException{
+        return projectService.updateProject(id, project, imageFile);
     }
 
     @DeleteMapping("/projects/{id}")

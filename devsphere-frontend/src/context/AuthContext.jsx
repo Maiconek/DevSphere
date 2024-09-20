@@ -149,7 +149,7 @@ export const AuthProvider = ({ children }) => {
     }
     
     useEffect(() => {
-        let time = 1000 * 60 * 2
+        let time = 1000 * 60 * 10
         let interval = setInterval(() => {
             if(token) {
                 refreshToken()

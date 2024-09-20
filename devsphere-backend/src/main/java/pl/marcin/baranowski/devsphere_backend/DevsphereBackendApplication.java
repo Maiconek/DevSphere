@@ -20,13 +20,13 @@ public class DevsphereBackendApplication {
 	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository,
 											   ProjectTagRepository projectTagRepository) {
 		return args -> {
-			var project = Project.builder()
-					.title("DevSphere")
-					.description("To bedzie swietny projekt, damy rade Marcin")
-					.shortIntro("Glowa do gory!!!")
-					.link("https://github.com/Maiconek/DevSphere")
-					.build();
-			projectRepository.save(project);
+//			var project = Project.builder()
+//					.title("DevSphere")
+//					.description("To bedzie swietny projekt, damy rade Marcin")
+//					.shortIntro("Glowa do gory!!!")
+//					.link("https://github.com/Maiconek/DevSphere")
+//					.build();
+//			projectRepository.save(project);
 
 			var tag = ProjectTag.builder()
 					.name("Java")
