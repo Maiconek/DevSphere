@@ -30,18 +30,19 @@ const ProjectsList = () => {
 
     return (
         <div className="album py-5 bg-body-teritiary">
-        <div className="container">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {projects.map((item) => (
-                    <ProjectCard
-                    key={item.id}
-                    title={item.title}
-                    image={item.imageUrl}
-                    intro={item.shortIntro}
-                    />
-                ))}
+            <div className="container">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {projects.map((item) => (
+                        <ProjectCard
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        image={item.imageUrl}
+                        intro={item.shortIntro}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
         </div>
     )
 

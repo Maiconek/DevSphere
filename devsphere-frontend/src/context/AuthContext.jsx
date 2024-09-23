@@ -1,34 +1,17 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 // Stwórz kontekst
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    // Stan dla zalogowanego użytkownika
-    // const [user, setUser] = useState(() => {
-    //     // Pobieranie danych z localStorage przy pierwszym załadowaniu
-    //     const userInStorage = localStorage.getItem('user');
-    //     return userInStorage ? JSON.parse(userInStorage) : null;
-    // });
 
-    const [token, setToken] = useState(localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null);
-   
-    
-    const [isLoggedIn, setIsLoggedIn] = useState(!!token);
-
+    const [token, setToken] = useState(() => localStorage.getItem('authToken') ? JSON.parse(localStorage.getItem('authToken')) : null);
+    const [user, setUser] = useState(() => localStorage.getItem('authToken') ? jwtDecode(localStorage.getItem('authToken')) : null)
     const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
-
-    // Synchronizacja ze stanem `localStorage` kiedy `user` się zmienia
-    // useEffect(() => {
-    //     if (user) {
-    //         localStorage.setItem('user', JSON.stringify(user));
-    //     } else {
-    //         localStorage.removeItem('user');
-    //     }
-    // }, [user]);
 
     // Funkcja rejestracji użytkownika
     const registerUser = async (e) => {
@@ -80,15 +63,14 @@ export const AuthProvider = ({ children }) => {
             let data = await response.json();
             console.log('Logowanie: ', data);
             console.log("Access token", data.access_token)
+            // console.log('Decode', jwtDecode(data.access_token))
 
             // Jeśli logowanie się powiedzie, ustaw użytkownika jako zalogowanego
             if (response.ok) {
-                console.log('wchodze')
-                // setUser(data);
-                setToken(data);
+                setToken(data)
                 localStorage.setItem('authToken', JSON.stringify(data))
                 console.log("Token", token);
-                setIsLoggedIn(true);
+                setUser(jwtDecode(data.access_token))
                 navigate("/")
             } else {
                 console.error('Błąd logowania:', data);
@@ -114,7 +96,7 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 console.log('ok')
                 localStorage.removeItem('authToken')
-                setIsLoggedIn(false)
+                setUser(null)
                 navigate("/login")
             } else {
                 console.error('Błąd:', data);
@@ -137,8 +119,11 @@ export const AuthProvider = ({ children }) => {
 
             if(response.ok) {
                 setToken(data)
+                setUser(jwtDecode(data.access_token))
                 localStorage.setItem('authToken', JSON.stringify(data))
                 console.log("Token", token);
+                console.log("User", user)
+                
             }
             else {
                 console.error('Błąd logowania:', data);
@@ -157,10 +142,19 @@ export const AuthProvider = ({ children }) => {
         }, time)
         return () => clearInterval(interval)
     }, [token, loading])
+
+    useEffect(() => {
+        if (token) {
+            // const decodedToken = jwtDecode(token.access_token);
+            // setUser(decodedToken);
+            console.log("User", user)
+            // console.log("Detail", user.sub)
+        }
+    }, [token]); 
     
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, registerUser, loginUser, logoutUser, token, refreshToken }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logoutUser, token, refreshToken }}>
             {children}
         </AuthContext.Provider>
     );

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 
@@ -25,7 +26,6 @@ public class Project {
     private String description;
     private String shortIntro;
     private String link;
-
     private String imageUrl;
 
     @ManyToOne
@@ -45,5 +45,4 @@ public class Project {
     )
     @JsonIgnoreProperties("projects")
     private List<ProjectTag> tags;
-
 }

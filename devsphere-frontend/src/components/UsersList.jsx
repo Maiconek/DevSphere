@@ -38,14 +38,20 @@ const UsersList = () => {
     return (
         <div>
         <Header />
-            <div className="container-fluid">
-                <div className="row">
-                    {users.map((item, index) => (
+        <div className="album py-5 bg-body-teritiary">
+            <div className="container">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {users.map((item) => (
                         <UserCard
-                        key={index}
-                        email={item.email} />
+                        key={item.id}
+                        id={item.id}
+                        email={item.email}
+                        firstName={item.firstName}
+                        lastName={item.lastName}
+                        image={item.imageUrl} />
                     ))}
                 </div>
+            </div>
             </div>
         </div>
     )

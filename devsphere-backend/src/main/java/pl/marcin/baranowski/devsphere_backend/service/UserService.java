@@ -30,6 +30,13 @@ public class UserService {
                 .toList();
     }
 
+    public UserDto getSingleUser(Long id) {
+        return userRepository.findById(id)
+                .stream()
+                .map(userMapper::toUserDto)
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
+    }
+
 //    public User findByUsername(String username) {
 //        return userRepository.findByUsername(username);
 //    }

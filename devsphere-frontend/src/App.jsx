@@ -6,28 +6,28 @@ import ProjectPage from './pages/ProjectPage'
 import PrivateRoute from './utils/PrivateRoute'
 import { AuthProvider } from './context/AuthContext.jsx'
 import UsersList from './components/UsersList.jsx'
+import UserPage from './pages/UserPage.jsx'
 import MainPage from './components/MainPage.jsx'
 
 
 function App() {
 
-
-
   return (
     <>
      <BrowserRouter>
      <AuthProvider>
-        <Routes>
+       <Routes>
           <Route path="/" element={<PrivateRoute />} >
             <Route path="/" element={<MainPage />} />
           </Route>
           <Route path="/login" element={<Login />} />            
           <Route path="/register" element={<Register />} />
           <Route path="/project-form" element={<ProjectForm />} />
-          <Route path="/project:id" element={<ProjectPage />} />
+          <Route path="/project/:id" element={<ProjectPage />} />
           <Route path="/users" element={<UsersList />} />
+          <Route path="/users/:id" element={<UserPage />} />
         </Routes>
-        </AuthProvider>
+      </AuthProvider>
       </BrowserRouter>
     </>  
   )
