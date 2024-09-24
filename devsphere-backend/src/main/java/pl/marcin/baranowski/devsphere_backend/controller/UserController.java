@@ -1,14 +1,13 @@
 package pl.marcin.baranowski.devsphere_backend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.marcin.baranowski.devsphere_backend.dto.UserDto;
 import pl.marcin.baranowski.devsphere_backend.model.User;
 import pl.marcin.baranowski.devsphere_backend.service.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,6 +24,11 @@ public class UserController {
     @GetMapping("/users/{id}")
     public UserDto getSingleUser(@PathVariable Long id) {
         return userService.getSingleUser(id);
+    }
+
+    @PutMapping("/users/{id}")
+    public UserDto updateProject(@PathVariable Long id, @RequestPart User user, @RequestPart MultipartFile image) throws IOException {
+        return userService.updateUser(id, user, image);
     }
 
 }

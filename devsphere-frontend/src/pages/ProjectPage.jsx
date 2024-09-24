@@ -32,7 +32,6 @@ const ProjectPage = () => {
 
     return (
         <div>
-        <Header/>
             <h1>{project.title}</h1>
         </div>
     )

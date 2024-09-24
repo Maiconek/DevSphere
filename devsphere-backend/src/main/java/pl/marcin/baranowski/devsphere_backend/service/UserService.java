@@ -3,11 +3,13 @@ package pl.marcin.baranowski.devsphere_backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import pl.marcin.baranowski.devsphere_backend.dto.UserDto;
 import pl.marcin.baranowski.devsphere_backend.exceptions.ResourceNotFoundException;
 import pl.marcin.baranowski.devsphere_backend.model.User;
 import pl.marcin.baranowski.devsphere_backend.repository.UserRepository;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -16,6 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final ImageUploaderService imageUploaderService;
 
 
     public User register(User user) {
@@ -35,6 +38,20 @@ public class UserService {
                 .stream()
                 .map(userMapper::toUserDto)
                 .findFirst().orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
+    }
+
+    public UserDto updateUser(Long id, User user, MultipartFile image) throws IOException {
+        User updatedUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
+        updatedUser.setFirstName(user.getFirstName());
+        updatedUser.setLastName(user.getLastName());
+        updatedUser.setEmail(user.getEmail());
+        updatedUser.setBio(user.getBio());
+        updatedUser.setCompany(user.getCompany());
+
+        String imageUrl = imageUploaderService.uploadImage(image);
+        updatedUser.setImageUrl(imageUrl);
+        return userMapper.toUserDto(updatedUser);
     }
 
 //    public User findByUsername(String username) {

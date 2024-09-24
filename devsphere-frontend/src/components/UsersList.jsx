@@ -36,8 +36,6 @@ const UsersList = () => {
     } 
 
     return (
-        <div>
-        <Header />
         <div className="album py-5 bg-body-teritiary">
             <div className="container">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -51,7 +49,6 @@ const UsersList = () => {
                         image={item.imageUrl} />
                     ))}
                 </div>
-            </div>
             </div>
         </div>
     )

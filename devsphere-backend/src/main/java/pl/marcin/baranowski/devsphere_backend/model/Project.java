@@ -33,7 +33,7 @@ public class Project {
     @JsonBackReference
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "projects_tags",
             joinColumns = {
