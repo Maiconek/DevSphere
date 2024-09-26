@@ -20,7 +20,6 @@ public class UserService {
     private final UserMapper userMapper;
     private final ImageUploaderService imageUploaderService;
 
-
     public User register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
@@ -45,12 +44,14 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
         updatedUser.setFirstName(user.getFirstName());
         updatedUser.setLastName(user.getLastName());
-        updatedUser.setEmail(user.getEmail());
         updatedUser.setBio(user.getBio());
         updatedUser.setCompany(user.getCompany());
 
         String imageUrl = imageUploaderService.uploadImage(image);
         updatedUser.setImageUrl(imageUrl);
+
+        userRepository.save(updatedUser);
+
         return userMapper.toUserDto(updatedUser);
     }
 

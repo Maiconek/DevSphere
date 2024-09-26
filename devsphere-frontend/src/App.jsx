@@ -30,7 +30,7 @@ function App() {
           <Route path="/project/:id" element={<ProjectPage />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/users/:id" element={<UserPage />} />
-          <Route path="/users/edit" element={<UserEditForm />} />
+          <Route path="/users/edit/:id" element={<UserEditForm />} />
         </Routes>
       </AuthProvider>
       </BrowserRouter>

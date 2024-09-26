@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useParams } from "react-router-dom";
-import ProjectCard from "../components/ProjectCard";
 
 const UserPage = () => {
     const [searchedUser, setSearchedUser] = useState('')
@@ -65,35 +64,17 @@ const UserPage = () => {
         }
     }
 
-    // const handleDeleteProject = (projectId) => {
-    //     const projectToDelete = userProjects.filter(id => id === projectId)
-    //     const newItems = [...userProjects]
-    //     userProjects.splice(projectToDelete, 1)
-    //     setUserProjects
-    // }
-
     return (
         <div>
             <h1>{searchedUser.firstName} {searchedUser.lastName}</h1>
             <p>{searchedUser.email}</p>
             {searchedUser.email === user.sub ?
                 <div>
-                    <button type="button" className="btn btn-primary me-2">Edit</button>
-                    {/* <div className="album py-5 bg-body-teritiary">
-                        <div className="container">
-                            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                                {userProjects.map((item) => (
-                                  <ProjectCard
-                                    key={item.id}
-                                    id={item.id}
-                                    title={item.title}
-                                    image={item.imageUrl}
-                                    intro={item.shortIntro}
-                                    />
-                            ))}
-                            </div>
-                        </div>
-                    </div> */}
+                    <Link to={`/users/edit/${searchedUser.id}`}>
+                        <button type="button" className="btn btn-primary me-2">Edit</button>
+                    </Link>
+                    
+                    
                     <h2>Your projects:</h2>
                     <table className="table table-hover w-75">
                         <thead>
