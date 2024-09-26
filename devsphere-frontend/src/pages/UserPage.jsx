@@ -116,7 +116,7 @@ const UserPage = () => {
                                     <Link to={`/project/${item.id}`}>
                                         <button type="button" className="btn btn-primary me-3">Visit</button>
                                     </Link>
-                                    <Link to={`/project/${item.id}`}>
+                                    <Link to={`/project-form/${item.id}`}>
                                         <button type="button" className="btn btn-success me-3">Edit</button>
                                     </Link>
                                     <button type="button" className="btn btn-danger me-3" onClick={() => deleteProject(item.id)}>Delete</button>

@@ -16,10 +16,10 @@ public class DevsphereBackendApplication {
 		SpringApplication.run(DevsphereBackendApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository,
-											   ProjectTagRepository projectTagRepository) {
-		return args -> {
+//	@Bean
+//	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository,
+//											   ProjectTagRepository projectTagRepository) {
+//		return args -> {
 //			var project = Project.builder()
 //					.title("DevSphere")
 //					.description("To bedzie swietny projekt, damy rade Marcin")
@@ -27,26 +27,26 @@ public class DevsphereBackendApplication {
 //					.link("https://github.com/Maiconek/DevSphere")
 //					.build();
 //			projectRepository.save(project);
-
-			var tag = ProjectTag.builder()
-					.name("Java")
-					.build();
-			projectTagRepository.save(tag);
-
-			var tag2 = ProjectTag.builder()
-					.name("Spring")
-					.build();
-			projectTagRepository.save(tag2);
-
-			var tag3 = ProjectTag.builder()
-					.name("React")
-					.build();
-			projectTagRepository.save(tag3);
-
-			var tag4 = ProjectTag.builder()
-					.name("JavaScript")
-					.build();
-			projectTagRepository.save(tag4);
-		};
-	}
+//
+//			var tag = ProjectTag.builder()
+//					.name("Java")
+//					.build();
+//			projectTagRepository.save(tag);
+//
+//			var tag2 = ProjectTag.builder()
+//					.name("Spring")
+//					.build();
+//			projectTagRepository.save(tag2);
+//
+//			var tag3 = ProjectTag.builder()
+//					.name("React")
+//					.build();
+//			projectTagRepository.save(tag3);
+//
+//			var tag4 = ProjectTag.builder()
+//					.name("JavaScript")
+//					.build();
+//			projectTagRepository.save(tag4);
+//		};
+//	}
 }

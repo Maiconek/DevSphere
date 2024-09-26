@@ -82,6 +82,18 @@ public class ProjectService {
             updatedProject.setImageUrl(imageUrl);
         }
 
+//        Set<ProjectTag> foundTags = new HashSet<>();
+//        for(ProjectTag tag: project.getTags()) {
+//            ProjectTag fTag = projectTagRepository.findById(tag.getId())
+//                    .orElseThrow(() -> new ResourceNotFoundException("Tag not found " + tag.getId()));
+//            foundTags.add(fTag);
+//        }
+
+        updatedProject.setTags(
+                project.getTags()
+        );
+
+
         return projectRepository.save(updatedProject);
     }
 

@@ -10,6 +10,7 @@ import UserPage from './pages/UserPage.jsx'
 import MainPage from './components/MainPage.jsx'
 import UserEditForm from './pages/UserEditForm.jsx'
 import Header from './components/Header.jsx'
+import EditProjectForm from './pages/EditProjectForm.jsx'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />            
           <Route path="/register" element={<Register />} />
           <Route path="/project-form" element={<ProjectForm />} />
+          <Route path="/project-form/:id" element={<EditProjectForm />} />
           <Route path="/project/:id" element={<ProjectPage />} />
           <Route path="/users" element={<UsersList />} />
           <Route path="/users/:id" element={<UserPage />} />
