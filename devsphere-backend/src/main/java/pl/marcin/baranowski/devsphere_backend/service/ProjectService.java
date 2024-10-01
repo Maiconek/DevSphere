@@ -39,10 +39,12 @@ public class ProjectService {
         project.setUser(owner);
 
         Set<ProjectTag> foundTags = new HashSet<>();
-        for(ProjectTag tag: project.getTags()) {
-            ProjectTag fTag = projectTagRepository.findById(tag.getId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Tag not found " + tag.getId()));
-            foundTags.add(fTag);
+        if(project.getTags() != null) {
+            for(ProjectTag tag: project.getTags()) {
+                ProjectTag fTag = projectTagRepository.findById(tag.getId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Tag not found " + tag.getId()));
+                foundTags.add(fTag);
+            }
         }
 
         if(imageFile != null && !imageFile.isEmpty()) {

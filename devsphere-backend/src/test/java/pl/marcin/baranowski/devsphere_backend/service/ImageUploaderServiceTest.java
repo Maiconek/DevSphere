@@ -19,7 +19,7 @@ public class ImageUploaderServiceTest {
 
     @Test
     public void shouldReturnCorrectUrl() throws IOException {
-        FileInputStream inputFile = new FileInputStream("C:\\Users\\mbara\\OneDrive\\Pulpit\\devsphere\\DevSphere\\devsphere-backend\\sample.jpg");
+        FileInputStream inputFile = new FileInputStream("src/main/resources/static/sample.jpg");
         MockMultipartFile file = new MockMultipartFile("file", "test", "multipart/form-data", inputFile);
 
         String url = imageUploaderService.uploadImage(file);
