@@ -62,7 +62,6 @@ public class ProjectControllerIntegrationTest {
 
     private User user;
 
-
     @BeforeEach
     void setUp() {
          user = User.builder()
@@ -159,6 +158,76 @@ public class ProjectControllerIntegrationTest {
     }
 
     @Test
+    @WithMockUser(username = "test")
+    public void should_return_status_200_for_successful_update_request() throws Exception {
+        Mockito.when(userRepository.findByEmail("test")).thenReturn(Optional.of(user));
+
+        Project existingProject = Project.builder()
+                .id(1L)
+                .title("Old title")
+                .description("Old desc")
+                .shortIntro("Old short intro")
+                .link("Old link")
+                .tags(null)
+                .build();
+
+        Project updatedProject = Project.builder()
+                .title("Updated title")  // nowe dane, które chcemy ustawić
+                .description("Updated desc")
+                .shortIntro("Updated short intro")
+                .link("Updated link")
+                .tags(null)
+                .build();
+
+        projectRepository.save(existingProject);
+
+        String projectJson = objectMapper.writeValueAsString(updatedProject);
+
+        // Wczytywanie rzeczywistego obrazu z zasobów (np. src/test/resources/test-image.jpg)
+        byte[] imageBytes = IOUtils.toByteArray(getClass().getResourceAsStream("/sample.jpg"));
+
+        // Mockowanie pliku obrazu
+        MockMultipartFile imageFile = new MockMultipartFile(
+                "imageFile",               // nazwa pola pliku
+                "sample.jpg",              // nazwa pliku
+                MediaType.IMAGE_JPEG_VALUE, // typ pliku (MIME type)
+                imageBytes                 // rzeczywista zawartość pliku obrazu
+        );
+
+        // Mockowanie danych JSON dla projektu
+        MockMultipartFile projectPart = new MockMultipartFile(
+                "project",                          // nazwa pola (musi się zgadzać z @RequestPart)
+                "",                                 // oryginalna nazwa pliku (nie dotyczy w przypadku JSON)
+                MediaType.APPLICATION_JSON_VALUE,   // typ zawartości (JSON)
+                projectJson.getBytes()              // zawartość JSON jako bajty
+        );
+
+        // Wykonanie żądania PUT na endpoint /projects/{id} (zaktualizowanie istniejącego projektu)
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.multipart("/api/v1/projects/" + existingProject.getId())
+                        .file(projectPart)                 // część JSON z danymi projektu
+                        .file(imageFile)                   // część pliku (obraz)
+                        .with(request -> {
+                            request.setMethod("PUT");      // metoda PUT
+                            return request;
+                        })
+                        .contentType(MediaType.MULTIPART_FORM_DATA))
+                .andDo(print())
+                .andExpect(status().is(200))               // oczekujemy statusu 200 OK
+                .andReturn();
+
+        // Odczytanie zaktualizowanego projektu z odpowiedzi
+        Project project = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Project.class);
+
+        // Asercje: Sprawdzamy, czy odpowiedź zawiera zaktualizowane dane projektu
+        assertNotNull(project);
+        assertEquals(updatedProject.getTitle(), project.getTitle());
+        assertEquals(updatedProject.getDescription(), project.getDescription());
+        assertEquals(updatedProject.getShortIntro(), project.getShortIntro());
+        assertEquals(updatedProject.getLink(), project.getLink());
+    }
+
+
+    @Test
     public void should_return_list_of_projects() throws Exception {
         // given
         Project newProject = Project.builder()
@@ -176,18 +245,9 @@ public class ProjectControllerIntegrationTest {
                 .build();
         projectRepository.save(newProject2);
 
-        Project newProject3 = Project.builder()
-                .title("Test title")
-                .description("Test desc")
-                .shortIntro("Test short intro")
-                .link("Test link")
-                .build();
-        projectRepository.save(newProject3);
-
         List<Project> projectList = new ArrayList<>();
         projectList.add(newProject);
         projectList.add(newProject2);
-        projectList.add(newProject3);
         // when
         MvcResult mvcResult = mockMvc.perform(get("/api/v1/projects"))
                 .andDo(print())
