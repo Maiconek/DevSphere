@@ -88,6 +88,7 @@ public class ProjectControllerIntegrationTest {
         MvcResult mvcResult = mockMvc.perform(get("/api/v1/projects/" + newProject.getId()))
                 .andDo(print())
                 .andExpect(status().is(200))
+                .andExpect(jsonPath("$.title").value("Test title"))
                 .andReturn();
         // then
         Project project = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Project.class);
@@ -110,16 +111,7 @@ public class ProjectControllerIntegrationTest {
     @Test
     @WithMockUser(username = "test")
     public void should_return_status_200_for_successful_post_request() throws Exception{
-        // given
-        // Tworzenie przykładowego użytkownika, który będzie zwracany przez userRepository
-//        User mockUser = new User();
-//        mockUser.setEmail("user@example.com");
-//        mockUser.setPassword("ssskdosdkosadsako");
-//        mockUser.setId(1L);
-//
-//        userRepository.save(mockUser);
-//
-//        // Mockowanie zachowania userRepository, aby zwróciło mockUser dla danego emaila
+        // Mockowanie zachowania userRepository, aby zwróciło mockUser dla danego emaila
         Mockito.when(userRepository.findByEmail("test")).thenReturn(Optional.of(user));
 
 
