@@ -75,7 +75,6 @@ const UserPage = () => {
                         <button type="button" className="btn btn-primary me-2">Edit</button>
                     </Link>
                     
-                    
                     <h2>Your projects:</h2>
                     <Table 
                         projects={userProjects}

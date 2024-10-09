@@ -1,6 +1,7 @@
 import React, {useState, useContext} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import FormField from "../components/FormField";
 
 const Register = () => {
 
@@ -11,7 +12,23 @@ const Register = () => {
         <div className="d-flex flex-column align-items-center">
             <h1>Register</h1>
             <form onSubmit={registerUser}>
-                <div className="mb-3">
+                <FormField 
+                    name="firstname"
+                    type="text"
+                />
+                <FormField 
+                    name="lastname"
+                    type="text"
+                />
+                <FormField 
+                    name="password"
+                    type="password"
+                />
+                <FormField 
+                    name="email"
+                    type="email"
+                />
+                {/* <div className="mb-3">
                     <label htmlFor="exampleInputFirstname1" className="form-label">Firstname</label>
                     <input type="text" className="form-control" id="exampleInputFirstname" name="firstname"/>
                 </div>
@@ -31,7 +48,8 @@ const Register = () => {
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp"/>
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-                </div>
+                </div> */}
+
                 
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <Link to='/login'><p className="m-3">Have an account? Login here</p></Link>
