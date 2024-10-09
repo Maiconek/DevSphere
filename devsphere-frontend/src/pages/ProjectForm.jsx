@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import FormField from "../components/FormField";
 
 const ProjectForm = () => {
 
@@ -80,45 +81,42 @@ const ProjectForm = () => {
         <div className="d-flex flex-column align-items-center">
             <h1>Dodaj projekt</h1>
             <form onSubmit={createProject}>
-                <div className="mb-3">
-                    <label htmlFor="exampleInputTitle1" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="exampleInputTitle" name="title"/>
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputShortIntro1" className="form-label">Short intro</label>
-                    <input type="text" className="form-control" id="exampleInputShortIntro" name="shortIntro"/>
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputDescription1" className="form-label">Description</label>
-                    <textarea type="text" className="form-control" id="exampleInputDescription" name="description"/>
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputLink1" className="form-label">Link</label>
-                    <input type="text" className="form-control" id="exampleInputLink" name="link"/>
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputImage1" className="form-label">Upload image</label>
-                    <input type="file" className="form-control" id="exampleInputImage" name="image" onChange={handleFileChange}/>
-                </div>
-
+                <FormField 
+                    name="title"
+                    type="text"
+                />
+                <FormField 
+                    name="shortIntro"
+                    type="text"
+                />
+                <FormField 
+                    name="description"
+                    type="text"
+                />
+                <FormField 
+                    name="link"
+                    type="text"
+                />
+                <FormField 
+                    name="image"
+                    type="file"
+                    onChange={handleFileChange}
+                />
+                
                 <div>
-                <label>Tagi:</label>
-                {tags.map(tag => (
-                    <div key={tag.id}>
-                        <input 
-                            type="checkbox" 
-                            value={tag.id} 
-                            checked={selectedTags.some(t => t.id === tag.id)} 
-                            onChange={() => handleTagChange(tag)} 
-                        />
-                        {tag.name}
-                    </div>
-                ))}
-            </div>
+                    <label>Tagi:</label>
+                        {tags.map(tag => (
+                            <div key={tag.id}>
+                                <input 
+                                    type="checkbox" 
+                                    value={tag.id} 
+                                    checked={selectedTags.some(t => t.id === tag.id)} 
+                                    onChange={() => handleTagChange(tag)} 
+                                />
+                                {tag.name}
+                            </div>
+                        ))}
+                </div>
                 
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <Link to="/"><button type="button" className="btn btn-secondary">Go back</button></Link>
