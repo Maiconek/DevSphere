@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormField = (props) => {
+const Field = (props) => {
 
     const capitalizeFieldName = (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1)
@@ -23,4 +23,4 @@ const FormField = (props) => {
     )
 }
 
-export default FormField;
+export default Field;

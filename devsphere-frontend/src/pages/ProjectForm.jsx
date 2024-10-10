@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import FormField from "../components/FormField";
+import Field from "../components/Field";
+import TextareaField from "../components/TextareaField";
 
 const ProjectForm = () => {
 
@@ -81,23 +82,23 @@ const ProjectForm = () => {
         <div className="d-flex flex-column align-items-center">
             <h1>Dodaj projekt</h1>
             <form onSubmit={createProject}>
-                <FormField 
+                <Field 
                     name="title"
                     type="text"
                 />
-                <FormField 
+                <Field 
                     name="shortIntro"
                     type="text"
                 />
-                <FormField 
+                <TextareaField 
                     name="description"
                     type="text"
                 />
-                <FormField 
+                <Field 
                     name="link"
                     type="text"
                 />
-                <FormField 
+                <Field 
                     name="image"
                     type="file"
                     onChange={handleFileChange}

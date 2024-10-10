@@ -1,7 +1,7 @@
 import React, {useState, useContext} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import FormField from "../components/FormField";
+import Field from "../components/Field";
 
 const Register = () => {
 
@@ -12,19 +12,19 @@ const Register = () => {
         <div className="d-flex flex-column align-items-center">
             <h1>Register</h1>
             <form onSubmit={registerUser}>
-                <FormField 
+                <Field 
                     name="firstname"
                     type="text"
                 />
-                <FormField 
+                <Field 
                     name="lastname"
                     type="text"
                 />
-                <FormField 
+                <Field 
                     name="password"
                     type="password"
                 />
-                <FormField 
+                <Field 
                     name="email"
                     type="email"
                 />
