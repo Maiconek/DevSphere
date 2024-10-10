@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-
+import Field from "../components/Field";
+import TextareaField from "../components/TextareaField";
 
 
 const UserEditForm = () => {
@@ -94,31 +95,40 @@ const UserEditForm = () => {
         <div className="d-flex flex-column align-items-center">
             <h1>Edit your profile</h1>
             <form onSubmit={editUser}>
-                <div className="mb-3">
-                    <label htmlFor="exampleInputFirstname1" className="form-label">Firstname</label>
-                    <input type="text" className="form-control" id="exampleInputFirstname" value={user.firstName} name="firstname" onChange={(e) => setUser({...user, firstName: e.target.value})}/>
-                </div>
+                <Field
+                    name="firstname"
+                    type="text"
+                    value={user.firstName}
+                    onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                />
 
-                <div className="mb-3">
-                    <label htmlFor="exampleInputLastname1" className="form-label">Lastname</label>
-                    <input type="text" className="form-control" id="exampleInputLastname" value={user.lastName} name="lastname" onChange={(e) => setUser({...user, lastName: e.target.value})}/>
-                </div>
+                <Field
+                    name="lastname"
+                    type="text"
+                    value={user.lastName}
+                    onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                />
 
-                <div className="mb-3">
-                    <label htmlFor="exampleInputBio1" className="form-label">Bio</label>
-                    <textarea type="text" className="form-control" id="exampleInputBio" value={user.bio} name="bio" onChange={(e) => setUser({...user, bio: e.target.value})}/>
-                </div>
+                <TextareaField
+                    name="bio"
+                    type="text"
+                    value={user.bio}
+                    onChange={(e) => setUser({ ...user, bio: e.target.value })}
+                />
 
-                <div className="mb-3">
-                    <label htmlFor="exampleInputCompany1" className="form-label">Company</label>
-                    <input type="text" className="form-control" id="exampleInputCompany" value={user.company} name="company" onChange={(e) => setUser({...user, company: e.target.value})} />
-                </div>
+                <Field
+                    name="company"
+                    type="text"
+                    value={user.company}
+                    onChange={(e) => setUser({ ...user, company: e.target.value })}
+                />
 
-                <div className="mb-3">
-                    <label htmlFor="exampleInputImage1" className="form-label">Upload image</label>
-                    <input type="file" className="form-control" id="exampleInputImage" name="image" onChange={handleFileChange}/>
-                </div>
-                
+                <Field
+                    name="image"
+                    type="file"
+                    onChange={handleFileChange}
+                />
+    
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Go back</button>
             </form>

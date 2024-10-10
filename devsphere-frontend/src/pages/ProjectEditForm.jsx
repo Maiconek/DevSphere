@@ -1,8 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import Field from "../components/Field";
+import TextareaField from "../components/TextareaField";
 
-const EditProjectForm = () => {
+const ProjectEditForm = () => {
 
     const { token } = useContext(AuthContext);
     const [tags, setTags] = useState([]);
@@ -121,7 +123,40 @@ const EditProjectForm = () => {
         <div className="d-flex flex-column align-items-center">
             <h1>Edytuj projekt</h1>
             <form onSubmit={editProject}>
-                <div className="mb-3">
+                <Field
+                    name="title"
+                    type="text"
+                    value={project.title}
+                    onChange={(e) => setProject({ ...project, title: e.target.value })}
+                />
+
+                <Field
+                    name="shortIntro"
+                    type="text"
+                    value={project.shortIntro}
+                    onChange={(e) => setProject({ ...project, shortIntro: e.target.value })}
+                />
+
+                <TextareaField
+                    name="description"
+                    type="text"
+                    value={project.description}
+                    onChange={(e) => setProject({ ...project, description: e.target.value })}
+                />
+
+                <Field
+                    name="link"
+                    type="text"
+                    value={project.link}
+                    onChange={(e) => setProject({ ...project, link: e.target.value })}
+                />
+
+                <Field
+                    name="image"
+                    type="file"
+                    onChange={handleFileChange}
+                />
+                {/* <div className="mb-3">
                     <label htmlFor="exampleInputTitle1" className="form-label">Title</label>
                     <input 
                         type="text" 
@@ -178,7 +213,7 @@ const EditProjectForm = () => {
                         name="image" 
                         onChange={handleFileChange}
                     />
-                </div>
+                </div> */}
 
                 <div>
                     <label>Tagi:</label>
@@ -202,4 +237,4 @@ const EditProjectForm = () => {
     );
 }
 
-export default EditProjectForm;
+export default ProjectEditForm;
