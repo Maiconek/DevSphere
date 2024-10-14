@@ -9,7 +9,7 @@ const MainPage = () => {
 
     return (
         <div> 
-            <Section />        
+            <Section isMainPage={true}/>        
             <ProjectsList />
         </div>
     )

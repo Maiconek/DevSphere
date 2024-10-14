@@ -55,7 +55,8 @@ public class UserService {
         return userMapper.toUserDto(updatedUser);
     }
 
-//    public User findByUsername(String username) {
-//        return userRepository.findByUsername(username);
-//    }
+    public UserDto findUserByEmail(String email) {
+        return userMapper.toUserDto(
+                userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User does not exist")));
+    }
 }

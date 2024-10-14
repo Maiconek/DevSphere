@@ -31,4 +31,9 @@ public class UserController {
         return userService.updateUser(id, user, image);
     }
 
+    @GetMapping("/users/email/{email}")
+    public UserDto getUserByEmail(@PathVariable String email) {
+        return userService.findUserByEmail(email);
+    }
+
 }
