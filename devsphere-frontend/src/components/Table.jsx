@@ -22,12 +22,12 @@ const Table = (props) => {
                         <td>{item.link}</td>
                             <td>
                                 <Link to={`/project/${item.id}`}>
-                                    <button type="button" className="btn btn-primary me-3">Visit</button>
+                                    <button type="button" className="btn btn-primary me-2">Visit</button>
                                 </Link>
                                 <Link to={`/project-form/${item.id}`}>
-                                    <button type="button" className="btn btn-success me-3">Edit</button>
+                                    <button type="button" className="btn btn-success me-2">Edit</button>
                                 </Link>
-                                    <button type="button" className="btn btn-danger me-3" onClick={() => props.delete(item.id)}>Delete</button>
+                                    <button type="button" className="btn btn-danger me-2" onClick={() => props.delete(item.id)}>Delete</button>
                              </td>
                     </tr>
                 ))}    

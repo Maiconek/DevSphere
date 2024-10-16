@@ -17,6 +17,8 @@ nav {
   display: flex;
   justify-content: center;
   padding: 25px;
+  position: fixed;
+  position: absolute;
 }
 
 .profile-info {
@@ -41,21 +43,30 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 60%;
+  height: 100%;
 }
 
 .profile-bio {
   background-color: white;
   margin: 5px;
+  margin-left: 10px;
   min-height: 40%;
   border-radius: 5%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 15px;
+  width: 100%;
 }
 
 .profile-projects {
-  background-color: antiquewhite;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
