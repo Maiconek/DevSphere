@@ -66,26 +66,38 @@ const UserPage = () => {
     }
 
     return (
-        <div>
-            <h1>{searchedUser.firstName} {searchedUser.lastName}</h1>
-            <p>{searchedUser.email}</p>
-            {searchedUser.email === user.sub ?
-                <div>
-                    <Link to={`/users/edit/${searchedUser.id}`}>
-                        <button type="button" className="btn btn-primary me-2">Edit</button>
-                    </Link>
-                    
-                    <h2>Your projects:</h2>
-                    <Table 
-                        projects={userProjects}
-                        delete={deleteProject}    
-                    />
-                </div>
+        <div className="profile-container bg-light">
+            <div className="profile-info">
+                <img src={searchedUser.imageUrl} className="profile-image"></img>  
+                <h1>{searchedUser.firstName} {searchedUser.lastName}</h1>
+                <p>Contact me at: {searchedUser.email}</p>
+                <p>{searchedUser.company}</p>
+                {searchedUser.email === user.sub ?
+                <Link to={`/users/edit/${searchedUser.id}`}>
+                    <button type="button" className="btn btn-primary me-2">Edit profile</button>
+                </Link>
                 :
                 <></>
             }
-        </div>
-    )
+            </div>
+            <div className="profile-right-side">
+                <div className="profile-bio">
+                    <h2>About me</h2>
+                    <p>{searchedUser.bio}</p>
+                </div>
+                {searchedUser.email === user.sub ?
+                    <div className="profile-projects">
+                        <h2>Your projects:</h2>
+                        <Table 
+                            projects={userProjects}
+                            delete={deleteProject}    
+                        />
+                    </div>
+                    : <></>
+            }
+                </div>
+            </div>
+        )
 }
 
 export default UserPage

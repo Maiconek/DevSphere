@@ -11,3 +11,51 @@ nav {
   width: 200px;
   height: 100px;
 }
+
+.profile-container {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 5%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  width: 30%;
+  margin: 5px;
+  padding: 5px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 35%;
+  height: 20%;
+}
+
+.profile-right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.profile-bio {
+  background-color: white;
+  margin: 5px;
+  min-height: 40%;
+  border-radius: 5%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 15px;
+}
+
+.profile-projects {
+  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
