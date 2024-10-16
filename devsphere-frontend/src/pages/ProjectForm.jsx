@@ -79,7 +79,7 @@ const ProjectForm = () => {
 
 
     return (
-        <div className="d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center mt-3">
             <h1>Dodaj projekt</h1>
             <form onSubmit={createProject}>
                 <Field 
@@ -119,7 +119,7 @@ const ProjectForm = () => {
                         ))}
                 </div>
                 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary me-2">Submit</button>
                 <Link to="/"><button type="button" className="btn btn-secondary">Go back</button></Link>
             </form>
         </div>

@@ -92,7 +92,7 @@ const UserEditForm = () => {
 
 
     return (
-        <div className="d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center mt-3">
             <h1>Edit your profile</h1>
             <form onSubmit={editUser}>
                 <Field
@@ -129,7 +129,7 @@ const UserEditForm = () => {
                     onChange={handleFileChange}
                 />
     
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary me-2">Submit</button>
                 <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Go back</button>
             </form>
         </div>

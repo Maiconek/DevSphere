@@ -120,7 +120,7 @@ const ProjectEditForm = () => {
     };
 
     return (
-        <div className="d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center mt-3">
             <h1>Edytuj projekt</h1>
             <form onSubmit={editProject}>
                 <Field
@@ -156,65 +156,7 @@ const ProjectEditForm = () => {
                     type="file"
                     onChange={handleFileChange}
                 />
-                {/* <div className="mb-3">
-                    <label htmlFor="exampleInputTitle1" className="form-label">Title</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        id="exampleInputTitle" 
-                        name="title" 
-                        value={project.title} 
-                        onChange={(e) => setProject({...project, title: e.target.value})}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputShortIntro1" className="form-label">Short intro</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        id="exampleInputShortIntro" 
-                        name="shortIntro"
-                        value={project.shortIntro}
-                        onChange={(e) => setProject({...project, shortIntro: e.target.value})}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputDescription1" className="form-label">Description</label>
-                    <textarea 
-                        type="text" 
-                        className="form-control" 
-                        id="exampleInputDescription" 
-                        name="description"
-                        value={project.description}
-                        onChange={(e) => setProject({...project, description: e.target.value})}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputLink1" className="form-label">Link</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        id="exampleInputLink" 
-                        name="link"
-                        value={project.link}
-                        onChange={(e) => setProject({...project, link: e.target.value})}
-                    />
-                </div>
-
-                <div className="mb-3">
-                    <label htmlFor="exampleInputImage1" className="form-label">Upload image</label>
-                    <input 
-                        type="file" 
-                        className="form-control" 
-                        id="exampleInputImage" 
-                        name="image" 
-                        onChange={handleFileChange}
-                    />
-                </div> */}
-
+                
                 <div>
                     <label>Tagi:</label>
                     {tags.map(tag => (
@@ -230,7 +172,7 @@ const ProjectEditForm = () => {
                     ))}
                 </div>
                 
-                <button type="submit" className="btn btn-primary">Zaktualizuj projekt</button>
+                <button type="submit" className="btn btn-primary me-2">Submit</button>
                 <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Go back</button>
             </form>
         </div>

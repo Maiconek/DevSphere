@@ -93,7 +93,10 @@ const UserPage = () => {
                             delete={deleteProject}    
                         />
                     </div>
-                    : <></>
+                    : 
+                    <div className="profile-projects">
+                        <h2>This user has no projects</h2>
+                    </div>
             }
                 </div>
             </div>

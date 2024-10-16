@@ -8,7 +8,7 @@ const Login = () => {
     const {loginUser} = useContext(AuthContext)
 
     return (
-        <div className="d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-center mt-3">
             <h1>Login</h1>
                 <form onSubmit={loginUser}>
                     <Field
