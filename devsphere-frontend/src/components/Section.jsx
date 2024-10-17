@@ -9,7 +9,7 @@ const Section = (props) => {
 
     useEffect(() => {
         fetchUser()
-    }, [curUser])
+    }, [])
 
     const fetchUser = async () => {
         try {

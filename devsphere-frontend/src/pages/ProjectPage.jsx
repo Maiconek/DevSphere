@@ -31,8 +31,20 @@ const ProjectPage = () => {
     }
 
     return (
-        <div>
-            <h1>{project.title}</h1>
+        <div className="project-container">
+            <div className="project-info">
+                <img src={project.imageUrl} className="project-image"></img>
+                <h1>{project.title}</h1>
+                <p>link</p>
+                <p>link</p>
+                <p>link</p>
+                <p>link</p>     
+            </div>
+            <div className="project-description">
+                <h2>About project</h2>
+                <p>{project.description}</p>
+            </div>
+
         </div>
     )
 }
