@@ -15,7 +15,7 @@ const TextareaField = (props) => {
                     className="form-control" 
                     id={props.name} 
                     name={props.name}
-                    value={props.value ? props.value : null}
+                    value={props.value ? props.value : undefined}
                     onChange={props.onChange}
                 />  :
                 <textarea 
@@ -23,7 +23,7 @@ const TextareaField = (props) => {
                     className="form-control" 
                     id={props.name} 
                     name={props.name}
-                    value={props.value ? props.value : null}
+                    value={props.value ? props.value : undefined}
                 />
             }
         </div>

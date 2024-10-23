@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Field from "../components/Field";
 import TextareaField from "../components/TextareaField";
+import Select from "react-select"; // Używamy poprawnej wersji z react-select
 
 const ProjectEditForm = () => {
 
@@ -29,7 +30,7 @@ const ProjectEditForm = () => {
 
     useEffect(() => {
         console.log(selectedTags)
-    }, [selectedTags])
+    }, [selectedTags]);
 
     // Pobieranie istniejących tagów
     const fetchTags = async () => {
@@ -63,19 +64,22 @@ const ProjectEditForm = () => {
                 description: data.description,
                 link: data.link
             });
-            setSelectedTags(data.tags); // Inicjalizuje zaznaczone tagi
+            setSelectedTags(data.tags.map(tag => ({ value: tag.id, label: tag.name }))); // Inicjalizuje zaznaczone tagi
         } catch (error) {
             console.error("Error fetching project: ", error);
         }
     };
 
-    const handleTagChange = (tag) => {
-        if (selectedTags.find(t => t.id === tag.id)) {
-            setSelectedTags(selectedTags.filter((t) => t.id !== tag.id)); // usuń tag
-        } else {
-            setSelectedTags([...selectedTags, tag]); // dodaj tag
-        }
+    // Funkcja obsługująca zmianę zaznaczonych tagów
+    const handleTagChange = (selectedOptions) => {
+        setSelectedTags(selectedOptions || []);  // Ustawienie wybranych tagów lub pustej listy
     };
+
+    // Przekształcamy tagi do formatu obsługiwanego przez react-select
+    const options = tags.map(tag => ({
+        value: tag.id,
+        label: tag.name
+    }));
 
     const handleFileChange = (e) => {
         setImage(e.target.files[0]); // Przechowuje wybrany plik w stanie
@@ -90,7 +94,7 @@ const ProjectEditForm = () => {
             shortIntro: e.target.shortIntro.value,
             description: e.target.description.value,
             link: e.target.link.value,
-            tags: selectedTags
+            tags: selectedTags.map(tag => ({ id: tag.value, name: tag.label })) // Dopasowanie formatu tagów
         };
 
         const formData = new FormData();
@@ -156,24 +160,22 @@ const ProjectEditForm = () => {
                     type="file"
                     onChange={handleFileChange}
                 />
+
+                {/* Dropdown Select z wieloma opcjami */}
+                <Select 
+                    isMulti
+                    value={selectedTags}
+                    onChange={handleTagChange}
+                    options={options}
+                    placeholder="Wybierz tagi"
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                />
                 
-                <div>
-                    <label>Tagi:</label>
-                    {tags.map(tag => (
-                        <div key={tag.id}>
-                            <input 
-                                type="checkbox" 
-                                value={tag.id} 
-                                checked={selectedTags.some(t => t.id === tag.id)} 
-                                onChange={() => handleTagChange(tag)} 
-                            />
-                            {tag.name}
-                        </div>
-                    ))}
+                <div className="mt-2">
+                    <button type="submit" className="btn btn-primary me-2">Submit</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Go back</button>
                 </div>
-                
-                <button type="submit" className="btn btn-primary me-2">Submit</button>
-                <button type="button" className="btn btn-secondary" onClick={() => navigate(-1)}>Go back</button>
             </form>
         </div>
     );
