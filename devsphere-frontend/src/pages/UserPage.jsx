@@ -71,7 +71,7 @@ const UserPage = () => {
                 <img src={searchedUser.imageUrl} className="profile-image"></img>  
                 <h1>{searchedUser.firstName} {searchedUser.lastName}</h1>
                 <p>Contact me at: {searchedUser.email}</p>
-                <p>{searchedUser.company}</p>
+                <p>Employed at: {searchedUser.company}</p>
                 {searchedUser.email === user.sub ?
                 <Link to={`/users/edit/${searchedUser.id}`}>
                     <button type="button" className="btn btn-primary me-2">Edit profile</button>

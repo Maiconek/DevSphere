@@ -24,6 +24,7 @@ const ProjectPage = () => {
             })
             let data = await response.json()
             setProject(data)
+            console.log(data)
         }
         catch (error) {
             console.error('Błąd połączenia:', error);
@@ -35,16 +36,21 @@ const ProjectPage = () => {
             <div className="project-info">
                 <img src={project.imageUrl} className="project-image"></img>
                 <h1>{project.title}</h1>
+                <p>Link to source code:</p>
                 <p>link</p>
-                <p>link</p>
-                <p>link</p>
-                <p>link</p>     
+                <div className="d-flex flex-column align-items-center">
+                    <h2>Used technologies:</h2>
+                    <div className="d-flex flex-row justify-content-center">
+                        {project.tags && project.tags.map((item, index) => (
+                            <p key={index} className="badge bg-secondary mt-2 me-2">{item.name}</p>
+                        ))}
+                    </div>
+                </div>  
             </div>
             <div className="project-description">
                 <h2>About project</h2>
                 <p>{project.description}</p>
             </div>
-
         </div>
     )
 }

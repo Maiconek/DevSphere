@@ -39,6 +39,7 @@ const ProjectsList = () => {
                         title={item.title}
                         image={item.imageUrl}
                         intro={item.shortIntro}
+                        tags={item.tags}
                         />
                     ))}
                 </div>
