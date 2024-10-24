@@ -30,7 +30,7 @@ const Register = () => {
                 />
                 
                 <button type="submit" className="btn btn-primary">Submit</button>
-                <Link to='/login'><p className="m-3">Have an account? Login here</p></Link>
+                <Link to='/login'><p className="mt-3">Have an account? Login here</p></Link>
             </form>
         </div>
     )

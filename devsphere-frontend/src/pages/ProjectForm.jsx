@@ -91,7 +91,7 @@ const ProjectForm = () => {
                     type="text"
                 />
                 <Field 
-                    name="shortIntro"
+                    name="short intro"
                     type="text"
                 />
                 <TextareaField 
@@ -106,8 +106,7 @@ const ProjectForm = () => {
                     name="image"
                     type="file"
                     onChange={handleFileChange}
-                />
-                
+                />                
                 
                 <Select 
                     isMulti

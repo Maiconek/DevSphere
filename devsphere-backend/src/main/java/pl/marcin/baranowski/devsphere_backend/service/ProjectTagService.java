@@ -16,7 +16,7 @@ public class ProjectTagService {
     }
 
     public List<ProjectTag> getAllTags() {
-        return projectTagRepository.findAll();
+        return projectTagRepository.findByOrderByName();
     }
 
     public ProjectTag getSingleProjectTag(Long id) {
