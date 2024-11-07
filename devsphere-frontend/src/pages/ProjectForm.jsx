@@ -91,7 +91,7 @@ const ProjectForm = () => {
                     type="text"
                 />
                 <Field 
-                    name="short intro"
+                    name="shortIntro"
                     type="text"
                 />
                 <TextareaField 

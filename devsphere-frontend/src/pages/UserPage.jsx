@@ -13,6 +13,7 @@ const UserPage = () => {
     useEffect(() => {
         getSingleUser()
         getUserProjects()
+        console.log(userProjects)
     }, [])
 
     const getSingleUser = async () => {
@@ -90,19 +91,27 @@ const UserPage = () => {
                     <h2>About me</h2>
                     <p>{searchedUser.bio}</p>
                 </div>
-                {searchedUser.email === user.sub ?
-                    <div className="profile-projects">
-                        <h2>Your projects:</h2>
-                        <Table 
-                            projects={userProjects}
-                            delete={deleteProject}    
-                        />
-                    </div>
-                    : 
+                {userProjects.length !== 0 ? 
+                    <>
+                        {searchedUser.email === user.sub  ?
+                            <div className="profile-projects">
+                                <h2>Your projects:</h2>
+                                <Table 
+                                    projects={userProjects}
+                                    delete={deleteProject}    
+                                />
+                            </div>
+                        : 
+                            <div className="profile-projects">
+                                <h2>You are not allowed</h2>
+                            </div>
+                        }
+                    </>
+                    :
                     <div className="profile-projects">
                         <h2>This user has no projects</h2>
-                    </div>
-            }
+                    </div> 
+                }
                 </div>
             </div>
         )
