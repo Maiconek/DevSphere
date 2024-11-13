@@ -50,6 +50,10 @@ public class User implements UserDetails {
     @JsonManagedReference
     private List<Skill> skills;
 
+    @OneToMany(mappedBy = "reviewer")
+    @JsonManagedReference
+    private List<Review> reviews;
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
