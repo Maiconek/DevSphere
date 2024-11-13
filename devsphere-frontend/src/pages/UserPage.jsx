@@ -98,12 +98,17 @@ const UserPage = () => {
                                 <h2>Your projects:</h2>
                                 <Table 
                                     projects={userProjects}
-                                    delete={deleteProject}    
+                                    delete={deleteProject}  
+                                    owner={true}  
                                 />
                             </div>
                         : 
                             <div className="profile-projects">
-                                <h2>You are not allowed</h2>
+                                <h2>{searchedUser.firstName}s projects:</h2>
+                                <Table
+                                    projects={userProjects}
+                                    owner={false}
+                                />
                             </div>
                         }
                     </>
