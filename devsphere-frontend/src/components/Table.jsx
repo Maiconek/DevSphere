@@ -29,7 +29,7 @@ const Table = (props) => {
                                         <Link to={`/project-form/${item.id}`}>
                                             <button type="button" className="btn btn-success me-2">Edit</button>
                                         </Link>
-                                        <button type="button" className="btn btn-danger me-2" onClick={() => props.delete(item.id)}>Delete</button>
+                                        <button type="button" className="btn btn-danger" onClick={() => props.delete(item.id)}>Delete</button>
                                     </>
                                 : <></>
                                 }
