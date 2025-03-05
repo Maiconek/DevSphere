@@ -23,7 +23,3 @@ User authentication is implemented using **JWT (JSON Web Token)** to ensure secu
 Project images and user profile pictures are hosted using **Cloudinary**
 ## Testing
 The project includes both **unit and integration tests** to ensure code reliability and maintainability.
-
----
-Feel free to contribute to DevSphere and make it a better place for developers worldwide!
-
