@@ -47,10 +47,18 @@ const ProjectPage = () => {
                     </div>
                 </div>  
             </div>
-            <div className="project-description">
-                <h2>About project</h2>
-                <p>{project.description}</p>
+            <div className="project-side">
+                <div className="project-description">
+                    <h2>About project</h2>
+                    <p>{project.description}</p>
+                </div>
+                <div className="review-input mt-2">
+                    <textarea className="form-control" aria-label="With textarea" placeholder="Type your review..."></textarea>
+                    <button className="btn btn-outline-secondary mt-2" type="button">Submit</button>
+                </div>
             </div>
+
+
         </div>
     )
 }

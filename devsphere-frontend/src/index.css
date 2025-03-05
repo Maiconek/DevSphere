@@ -82,6 +82,8 @@ nav {
   position: absolute;
 }
 
+
+
 .project-info {
   display: flex;
   flex-direction: column;
@@ -89,7 +91,7 @@ nav {
   background-color: white;
   border-radius: 5%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  width: 30%;
+  width: 40%;
   height: 50%;
   margin: 5px;
   padding: 5px;
@@ -100,12 +102,32 @@ nav {
   height: 50%;
 }
 
+
+.project-side {
+  min-height: 100%;
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .project-description {
   background-color: white;
   border-radius: 5%;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  width: 70%;
+  width: 80%;
   height: 50%;
   margin: 5px;
-  padding: 10px;
+  padding: 15px;
+}
+
+.project-review-form {
+  width: 80%;
+  height: 40%;
+  margin-top: 10px;
+}
+
+.review-input {
+  width: 80%;
+  height: 80%;
 }

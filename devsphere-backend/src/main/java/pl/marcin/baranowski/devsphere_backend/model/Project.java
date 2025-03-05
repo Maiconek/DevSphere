@@ -46,7 +46,7 @@ public class Project {
     @JsonIgnoreProperties("projects")
     private List<ProjectTag> tags;
 
-    @OneToMany(mappedBy = "projects")
+    @OneToMany(mappedBy = "project")
     @JsonManagedReference
     private List<Review> reviews;
 
