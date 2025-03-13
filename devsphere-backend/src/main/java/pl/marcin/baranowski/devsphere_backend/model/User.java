@@ -40,18 +40,7 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    private List<Token> tokens;
-
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Project> projects;
-
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private List<Skill> skills;
-
-    @OneToMany(mappedBy = "reviewer")
-    @JsonManagedReference
+    @JsonManagedReference("user-reviews")
     private List<Review> reviews;
 
     @Override
@@ -97,3 +86,4 @@ public class User implements UserDetails {
         }
     }
 }
+

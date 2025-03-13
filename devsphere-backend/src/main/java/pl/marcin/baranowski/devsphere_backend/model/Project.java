@@ -47,7 +47,7 @@ public class Project {
     private List<ProjectTag> tags;
 
     @OneToMany(mappedBy = "project")
-    @JsonManagedReference
+    @JsonBackReference("project-reviews")
     private List<Review> reviews;
 
 }
