@@ -31,6 +31,30 @@ const ProjectPage = () => {
         }
     }
 
+    const addReview = async (e) => {
+        try {
+            let response = await fetch("http://localhost:8080/api/v1/reviews", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token.access_token,
+                },
+                body: JSON.stringify({
+                    content: e.target.content.value,
+                    score: parseInt(e.target.score.value),
+                    projectId: project.id 
+                }),
+            });
+            let data = await response.json();
+            console.log(data);
+        }
+        catch (error) {
+            console.error('Błąd połączenia:', error);
+        }
+
+    }
+
+  
     return (
         <div className="project-container">
             <div className="project-info">
@@ -52,10 +76,11 @@ const ProjectPage = () => {
                     <h2>About project</h2>
                     <p>{project.description}</p>
                 </div>
-                <div className="review-input mt-2">
-                    <textarea className="form-control" aria-label="With textarea" placeholder="Type your review..."></textarea>
-                    <button className="btn btn-outline-secondary mt-2" type="button">Submit</button>
-                </div>
+                <form className="review-input mt-2" onSubmit={addReview}>
+                    <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
+                    <input className="form-control mt-2" name="score" type="number"></input>
+                    <button className="btn btn-outline-secondary mt-2" type="submit">Submit</button>
+                </form>
             </div>
 
 
