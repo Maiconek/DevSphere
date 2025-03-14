@@ -20,6 +20,11 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
+    @GetMapping("/reviews/{id}")
+    public ReviewDto getSingleReview(@PathVariable Long id) {
+        return reviewService.getSingleReview(id);
+    }
+
     @GetMapping("/reviews/projects/{id}")
     public List<ReviewDto> getReviewsByProjectId(@PathVariable Long id) {
         return reviewService.getReviewsByProjectId(id);
