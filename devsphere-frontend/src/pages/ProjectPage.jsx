@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useParams } from "react-router-dom";
 import Header from "../components/Header";
+import ReviewList from "../components/ReviewList";
 
 const ProjectPage = () => {
 
@@ -76,6 +77,10 @@ const ProjectPage = () => {
                     <h2>About project</h2>
                     <p>{project.description}</p>
                 </div>
+                <ReviewList 
+                    id={id}
+                    token={token.access_token}
+                />
                 <form className="review-input mt-2" onSubmit={addReview}>
                     <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
                     <input className="form-control mt-2" name="score" type="number"></input>

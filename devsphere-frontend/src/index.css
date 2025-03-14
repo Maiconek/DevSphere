@@ -127,6 +127,10 @@ nav {
   margin-top: 10px;
 }
 
+.reviews-list {
+  width: 80%;
+}
+
 .review-input {
   width: 80%;
   height: 80%;
