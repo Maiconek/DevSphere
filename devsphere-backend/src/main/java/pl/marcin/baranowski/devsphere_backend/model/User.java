@@ -1,5 +1,6 @@
 package pl.marcin.baranowski.devsphere_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -40,7 +41,7 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference("user-reviews")
+    @JsonBackReference("user-reviews")
     private List<Review> reviews;
 
     @Override

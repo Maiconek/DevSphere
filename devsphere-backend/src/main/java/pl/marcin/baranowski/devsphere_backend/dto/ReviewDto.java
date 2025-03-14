@@ -1,8 +1,11 @@
 package pl.marcin.baranowski.devsphere_backend.dto;
 
+import pl.marcin.baranowski.devsphere_backend.model.Project;
+
 public record ReviewDto(
-        Long projectId,
         String content,
-        Integer score
+        Integer score,
+        UserDto userDto,
+        Project project
 ) {
 }

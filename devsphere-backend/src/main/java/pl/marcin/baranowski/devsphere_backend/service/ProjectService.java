@@ -65,7 +65,6 @@ public class ProjectService {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Project does not exist with id: " + id));
     }
-
     public List<Project> getProjectsByUserId(Long userId) {
         return projectRepository.findByUserId(userId);
     }

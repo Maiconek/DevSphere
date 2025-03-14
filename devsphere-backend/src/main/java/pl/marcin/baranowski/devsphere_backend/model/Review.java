@@ -1,6 +1,7 @@
 package pl.marcin.baranowski.devsphere_backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
@@ -35,7 +36,7 @@ public class Review {
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonBackReference("user-reviews")
+    @JsonManagedReference("user-reviews")
     private User user;
 
     public Review(User user, Project project, String content, Integer score) {
