@@ -135,3 +135,10 @@ nav {
   width: 80%;
   height: 80%;
 }
+
+.review-profile-image {
+  width: 50px; /* lub inna stała wartość */
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover; /* Zapewnia, że obraz będzie przycięty do okrągłego kształtu */
+}

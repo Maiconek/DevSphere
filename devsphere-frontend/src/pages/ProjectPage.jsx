@@ -83,7 +83,7 @@ const ProjectPage = () => {
                 />
                 <form className="review-input mt-2" onSubmit={addReview}>
                     <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
-                    <input className="form-control mt-2" name="score" type="number"></input>
+                    <input className="form-control mt-2" name="score" type="number" placeholder="Rate the project between 0-5"></input>
                     <button className="btn btn-outline-secondary mt-2" type="submit">Submit</button>
                 </form>
             </div>
