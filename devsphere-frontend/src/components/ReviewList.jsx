@@ -37,11 +37,6 @@ const ReviewList = (props) => {
                             <span className="ms-1">{item.content}</span>
                         </div>
                         <span class="badge text-bg-primary rounded-pill">Score: {item.score}/5</span>
-                        {/* <div className="review-info d-flex flex-row">
-                            <img className="review-profile-image" src={item.userDto.imageUrl}></img>
-                            <p>{item.userDto.firstName} {item.userDto.lastName}</p>
-                            <span class="badge text-bg-primary rounded-pill">{item.score}/5</span>
-                        </div> */}
                         
                     </li>
                 )))}
