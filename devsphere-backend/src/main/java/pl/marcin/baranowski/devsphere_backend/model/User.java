@@ -41,7 +41,8 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference("user-reviews")
+//    @JsonBackReference("user-reviews")
+    @JsonIgnore
     private List<Review> reviews;
 
     @Override

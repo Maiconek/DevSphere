@@ -30,13 +30,13 @@ public class Review {
     @ManyToOne
     @MapsId("projectId")
     @JoinColumn(name = "project_id")
-    @JsonManagedReference("project-reviews")
+//    @JsonManagedReference("project-reviews")
     private Project project;
 
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
-    @JsonManagedReference("user-reviews")
+//    @JsonManagedReference("user-reviews")
     private User user;
 
     public Review(User user, Project project, String content, Integer score) {

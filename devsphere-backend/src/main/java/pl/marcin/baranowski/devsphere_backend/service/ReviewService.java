@@ -30,10 +30,10 @@ public class ReviewService {
                 .toList();
     }
 
-    public ReviewDto getSingleReview(Long id) {
+    public ReviewDto getSingleReview(Long projectId, Long userId) {
+        ReviewId reviewId = new ReviewId(userId, projectId);
         return reviewMapper.toReviewDto(
-                reviewRepository.findById(id).orElseThrow(() -> new RuntimeException("User does not exist")));
-
+                reviewRepository.findById(reviewId).orElseThrow(() -> new RuntimeException("User does not exist")));
     }
 
     public List<ReviewDto> getReviewsByProjectId(Long id) {
@@ -75,7 +75,8 @@ public class ReviewService {
     }
 
 
-    public void deleteReview(Long id) {
-        reviewRepository.deleteById(id);
+    public void deleteReview(Long userId, Long projectId) {
+        ReviewId reviewId = new ReviewId(userId, projectId);
+        reviewRepository.deleteById(reviewId);
     }
 }

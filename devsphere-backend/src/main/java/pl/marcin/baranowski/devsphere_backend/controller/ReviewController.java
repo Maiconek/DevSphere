@@ -20,11 +20,10 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
-    @GetMapping("/reviews/{id}")
-    public ReviewDto getSingleReview(@PathVariable Long id) {
-        return reviewService.getSingleReview(id);
+    @GetMapping("/reviews/{userId}/{projectId}")
+    public ReviewDto getSingleReview(@PathVariable Long userId, @PathVariable Long projectId) {
+        return reviewService.getSingleReview(userId, projectId);
     }
-
     @GetMapping("/reviews/projects/{id}")
     public List<ReviewDto> getReviewsByProjectId(@PathVariable Long id) {
         return reviewService.getReviewsByProjectId(id);
@@ -35,8 +34,8 @@ public class ReviewController {
         return reviewService.saveReview(reviewRequestDto);
     }
 
-    @DeleteMapping("/reviews/{id}")
-    public void deleteReview(@PathVariable Long id) {
-         reviewService.deleteReview(id);
+    @DeleteMapping("/reviews/{userId}/{projectId}")
+    public void deleteReview(@PathVariable Long userId, @PathVariable Long projectId) {
+         reviewService.deleteReview(userId, projectId);
     }
 }
