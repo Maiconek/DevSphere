@@ -5,7 +5,7 @@ import { useContext } from "react";
 
 const Header = () => {
 
-    const {logoutUser} = useContext(AuthContext)
+    const {logoutUser, token} = useContext(AuthContext)
 
     return (
         <nav className="navbar navbar-expand-lg bg-secondary">
@@ -26,9 +26,12 @@ const Header = () => {
                     </ul>
                 </div>
 
-                <div className="d-lg-flex col-lg-3 justify-content-lg-end">
-                    <button className="btn btn-danger" onClick={logoutUser}>Logout</button>
-                </div>
+                {token  &&
+                    <div className="d-lg-flex col-lg-3 justify-content-lg-end">
+                        <button className="btn btn-danger" onClick={logoutUser}>Logout</button>
+                    </div>
+                }
+                
             </div>
         </nav>
     )
