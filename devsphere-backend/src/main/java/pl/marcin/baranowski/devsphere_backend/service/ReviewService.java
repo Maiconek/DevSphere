@@ -79,4 +79,17 @@ public class ReviewService {
         ReviewId reviewId = new ReviewId(userId, projectId);
         reviewRepository.deleteById(reviewId);
     }
+
+    public Double calculateAvgReviewScore(Long projectId) {
+        List<Review> reviews = reviewRepository.findByProjectId(projectId);
+        double sum = 0;
+        for(Review r : reviews) {
+            sum += r.getScore();
+        }
+
+        double averageScore = sum / reviews.size();
+        System.out.println(averageScore);
+
+        return Math.round(averageScore * 100) / 100.0;
+    }
 }

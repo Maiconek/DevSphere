@@ -39,6 +39,7 @@ public class UserService {
                 .findFirst().orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
     }
 
+
     public UserDto updateUser(Long id, User user, MultipartFile image) throws IOException {
         User updatedUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));

@@ -2,6 +2,7 @@ package pl.marcin.baranowski.devsphere_backend.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import pl.marcin.baranowski.devsphere_backend.dto.UserDto;
 import pl.marcin.baranowski.devsphere_backend.model.Project;
 import pl.marcin.baranowski.devsphere_backend.service.ProjectService;
 
@@ -30,6 +31,11 @@ public class ProjectController {
     @GetMapping("/projects/user/{id}")
     public List<Project> getProjectsByUserId(@PathVariable Long id) {
         return projectService.getProjectsByUserId(id);
+    }
+
+    @GetMapping("projects/{id}/owner")
+    public UserDto getOwnerOfProject(@PathVariable Long id) {
+        return projectService.getOwnerOfProject(id);
     }
 
     @PostMapping("/projects")

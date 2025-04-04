@@ -26,6 +26,7 @@ public class UserController {
         return userService.getSingleUser(id);
     }
 
+
     @PutMapping("/users/{id}")
     public UserDto updateProject(@PathVariable Long id, @RequestPart User user, @RequestPart MultipartFile image) throws IOException {
         return userService.updateUser(id, user, image);

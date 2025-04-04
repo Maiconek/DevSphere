@@ -50,5 +50,4 @@ public class Project {
 //    @JsonBackReference("project-reviews"
     @JsonIgnore
     private List<Review> reviews;
-
 }

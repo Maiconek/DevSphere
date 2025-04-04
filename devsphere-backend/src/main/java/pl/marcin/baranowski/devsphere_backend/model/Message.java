@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "messages")
-public class Message {
+public class Message<T> {
     @Id
     @GeneratedValue
     private Long id;

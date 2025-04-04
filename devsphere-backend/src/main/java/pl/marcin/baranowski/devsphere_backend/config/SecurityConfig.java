@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // wylacznie csrf
                 .cors(withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll() // endpointy nie podlegajace autentykacji
+                        .requestMatchers("/api/v1/auth/**", "/ws/**", "/ws").permitAll() // endpointy nie podlegajace autentykacji
                         .anyRequest().authenticated() // cała reszta podlega
                 )
                 .sessionManagement(session -> session

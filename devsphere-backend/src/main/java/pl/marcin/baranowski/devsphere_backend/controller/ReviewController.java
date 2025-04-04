@@ -38,4 +38,9 @@ public class ReviewController {
     public void deleteReview(@PathVariable Long userId, @PathVariable Long projectId) {
          reviewService.deleteReview(userId, projectId);
     }
+
+    @GetMapping("/reviews/score/{projectId}")
+    public Double getAvgReviewScore(@PathVariable Long projectId) {
+        return reviewService.calculateAvgReviewScore(projectId);
+    }
 }

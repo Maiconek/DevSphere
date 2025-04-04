@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import pl.marcin.baranowski.devsphere_backend.dto.UserDto;
 import pl.marcin.baranowski.devsphere_backend.exceptions.ResourceNotFoundException;
 import pl.marcin.baranowski.devsphere_backend.model.Project;
 import pl.marcin.baranowski.devsphere_backend.model.ProjectTag;
@@ -25,6 +26,7 @@ public class ProjectService {
     private final UserRepository userRepository;
     private final ProjectTagRepository projectTagRepository;
     private final ImageUploaderService imageUploaderService;
+    private final UserMapper userMapper;
 
 
 
@@ -69,6 +71,8 @@ public class ProjectService {
         return projectRepository.findByUserId(userId);
     }
 
+
+
     public Project updateProject(Long id, Project project, MultipartFile imageFile) throws IOException {
         Project updatedProject = projectRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Project does not exist with id: " + id));
@@ -100,5 +104,12 @@ public class ProjectService {
 
     public void deleteProject(Long id) {
         projectRepository.deleteById(id);
+    }
+
+    public UserDto getOwnerOfProject(Long id) {
+        Project project = projectRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project does not exist with id: " + id));
+        return userMapper.toUserDto(project.getUser());
     }
 }
