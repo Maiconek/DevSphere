@@ -23,13 +23,18 @@ const Header = () => {
                         <li className="nav-item">
                             <Link className="nav-link active text-light" to="/users">Users</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link active text-light" to="/chats">Chat</Link>
+                        </li>
                     </ul>
                 </div>
 
-                {token  &&
+                {token !== null  ?
                     <div className="d-lg-flex col-lg-3 justify-content-lg-end">
                         <button className="btn btn-danger" onClick={logoutUser}>Logout</button>
                     </div>
+                    :
+                    <></>
                 }
                 
             </div>

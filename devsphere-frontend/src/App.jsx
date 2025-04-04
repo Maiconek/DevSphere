@@ -11,6 +11,7 @@ import MainPage from './components/MainPage.jsx'
 import UserEditForm from './pages/UserEditForm.jsx'
 import Header from './components/Header.jsx'
 import ProjectEditForm from './pages/ProjectEditForm.jsx'
+import Chat from './pages/Chat.jsx'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/users" element={<UsersList />} />
           <Route path="/users/:id" element={<UserPage />} />
           <Route path="/users/edit/:id" element={<UserEditForm />} />
+          <Route path="/chats" element={<Chat />} />
         </Routes>
       </AuthProvider>
       </BrowserRouter>

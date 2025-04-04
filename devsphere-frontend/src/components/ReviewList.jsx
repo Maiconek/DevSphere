@@ -36,7 +36,7 @@ const ReviewList = (props) => {
                             </div>
                             <span className="ms-1">{item.content}</span>
                         </div>
-                        <span class="badge text-bg-primary rounded-pill">Score: {item.score}/5</span>
+                        <span className="badge text-bg-primary rounded-pill">Score: {item.score}/5</span>
                         
                     </li>
                 )))}

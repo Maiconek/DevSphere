@@ -6,13 +6,17 @@ import ReviewList from "../components/ReviewList";
 
 const ProjectPage = () => {
 
-    const {token} = useContext(AuthContext)
+    const {token, user} = useContext(AuthContext)
     const [project, setProject] = useState('')
+    const [owner, setOwner] = useState('')
+    const [score, setScore] = useState('')
     const params = useParams()
     const id = params.id
 
     useEffect(() => {
         getSingleProject()
+        getAvgScore()
+        getProjectOwner()
     }, [])
 
     const getSingleProject = async () => {
@@ -25,6 +29,23 @@ const ProjectPage = () => {
             })
             let data = await response.json()
             setProject(data)
+            console.log(data)
+        }
+        catch (error) {
+            console.error('Błąd połączenia:', error);
+        }
+    }
+
+    const getProjectOwner = async () => {
+        try {
+            let response = await fetch(`http://localhost:8080/api/v1/projects/${id}/owner`, {
+                method : 'GET',
+                'headers': {
+                    'Authorization': "Bearer " + token.access_token,
+                },
+            })
+            let data = await response.json()
+            setOwner(data)
             console.log(data)
         }
         catch (error) {
@@ -52,7 +73,23 @@ const ProjectPage = () => {
         catch (error) {
             console.error('Błąd połączenia:', error);
         }
+    }
 
+    const getAvgScore = async () => {
+        try {
+            let response = await fetch(`http://localhost:8080/api/v1/reviews/score/${id}`, {
+                method : 'GET',
+                'headers': {
+                    'Authorization': "Bearer " + token.access_token,
+                },
+            })
+            let data = await response.json()
+            setScore(data)
+            console.log(data)
+        }
+        catch (error) {
+            console.error('Błąd połączenia:', error);
+        }
     }
 
   
@@ -64,12 +101,17 @@ const ProjectPage = () => {
                 <p>Link to source code:</p>
                 <p>link</p>
                 <div className="d-flex flex-column align-items-center">
-                    <h2>Used technologies:</h2>
+                    <h2>Average score:</h2>
+                    <h3>{score}/5</h3>
+                    <h3>Used technologies:</h3>
                     <div className="d-flex flex-row justify-content-center">
                         {project.tags && project.tags.map((item, index) => (
                             <p key={index} className="badge bg-secondary mt-2 me-2">{item.name}</p>
                         ))}
                     </div>
+                    
+                    
+                    
                 </div>  
             </div>
             <div className="project-side">
@@ -81,11 +123,15 @@ const ProjectPage = () => {
                     id={id}
                     token={token.access_token}
                 />
+                {owner.email !== user.sub ?
                 <form className="review-input mt-2" onSubmit={addReview}>
                     <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
                     <input className="form-control mt-2" name="score" type="number" placeholder="Rate the project between 0-5"></input>
                     <button className="btn btn-outline-secondary mt-2" type="submit">Submit</button>
                 </form>
+                :
+                <></>
+                }
             </div>
 
 
