@@ -20,6 +20,6 @@ DevSphere is a platform designed for developers to share their projects, rate ot
 User authentication is implemented using **JWT (JSON Web Token)** to ensure secure access to the platform.
 
 ## Image Hosting
-Project images and user profile pictures are hosted using **Cloudinary**
+Project images and user profile pictures are hosted using **Cloudinary**.
 ## Testing
-The project includes both **unit and integration tests** to ensure code reliability and maintainability.
+The project includes both **unit and integration tests**.
