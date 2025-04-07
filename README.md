@@ -15,6 +15,7 @@ DevSphere is a platform designed for developers to share their projects, rate ot
 - **Docker**
 - **PostgreSQL**
 - **JUnit**
+- **MockMVC**
 
 ## Authentication & Security
 User authentication is implemented using **JWT (JSON Web Token)** to ensure secure access to the platform.
