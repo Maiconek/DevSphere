@@ -1,4 +1,4 @@
-package pl.marcin.baranowski.devsphere_backend.config;
+package pl.marcin.baranowski.devsphere_backend.config.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

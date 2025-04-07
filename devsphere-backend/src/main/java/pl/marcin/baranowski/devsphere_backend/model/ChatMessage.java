@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "messages")
-public class Message<T> {
+public class ChatMessage {
     @Id
     @GeneratedValue
     private Long id;
@@ -23,10 +23,7 @@ public class Message<T> {
     @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
 
-    @ManyToOne
-    @JoinColumn(name = "receiver_id", nullable = false)
-    private User receiver;
-
     private String content;
     private LocalDateTime timestamp;
+    private MessageType messageType;
 }

@@ -1,4 +1,4 @@
-package pl.marcin.baranowski.devsphere_backend.config;
+package pl.marcin.baranowski.devsphere_backend.config.websockets;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

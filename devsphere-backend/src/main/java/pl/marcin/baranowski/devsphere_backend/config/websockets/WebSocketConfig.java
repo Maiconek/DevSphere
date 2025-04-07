@@ -1,4 +1,4 @@
-package pl.marcin.baranowski.devsphere_backend.config;
+package pl.marcin.baranowski.devsphere_backend.config.websockets;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import pl.marcin.baranowski.devsphere_backend.model.User;
-import pl.marcin.baranowski.devsphere_backend.repository.UserRepository;
+import pl.marcin.baranowski.devsphere_backend.config.jwt.JwtService;
 
 @Configuration
 @EnableWebSocketMessageBroker
@@ -32,9 +31,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:5173")
-                .withSockJS()
-                .setSuppressCors(true); // 💡 Wyłącza sprawdzanie CORS w SockJS
+                .withSockJS();
 
     }
 
