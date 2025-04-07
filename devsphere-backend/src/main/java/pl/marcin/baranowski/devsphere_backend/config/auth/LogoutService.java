@@ -1,4 +1,4 @@
-package pl.marcin.baranowski.devsphere_backend.config;
+package pl.marcin.baranowski.devsphere_backend.config.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

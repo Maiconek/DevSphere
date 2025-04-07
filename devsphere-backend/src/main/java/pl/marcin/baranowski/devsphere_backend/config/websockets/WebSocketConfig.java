@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import pl.marcin.baranowski.devsphere_backend.config.jwt.JwtChannelInterceptor;
 import pl.marcin.baranowski.devsphere_backend.config.jwt.JwtService;
 
 @Configuration
@@ -27,6 +28,7 @@ import pl.marcin.baranowski.devsphere_backend.config.jwt.JwtService;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final JwtChannelInterceptor jwtChannelInterceptor;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -43,32 +45,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.interceptors(new ChannelInterceptor() {
-            @Override
-            public Message<?> preSend(Message<?> message, MessageChannel channel) {
-                StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-                log.info("Headers: {}", accessor);
-
-                assert accessor != null;
-
-                if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-                    String token = accessor.getFirstNativeHeader("Authorization");
-                    if (token != null && token.startsWith("Bearer ")) {
-                        token = token.substring(7);
-                        String userEmail = jwtService.extractUsername(token);
-                        UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
-//                        System.out.println(user.getFirstName() + " " + user.getLastName());
-                        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                        accessor.setUser(usernamePasswordAuthenticationToken);
-                    } else {
-                        throw new IllegalArgumentException("Missing or invalid Authorization header");
-                    }
-                }
-                return message;
-            }
-        });
+        registration.interceptors(jwtChannelInterceptor);
     }
 }
 
