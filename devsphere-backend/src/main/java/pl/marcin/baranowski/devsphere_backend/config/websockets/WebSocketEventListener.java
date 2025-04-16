@@ -14,28 +14,28 @@ import pl.marcin.baranowski.devsphere_backend.repository.UserRepository;
 
 import java.time.LocalDateTime;
 
-@Component
-@RequiredArgsConstructor
-@Slf4j
-public class WebSocketEventListener {
-    private final SimpMessageSendingOperations messageTemplate;
-    private final UserRepository userRepository;
-
-    @EventListener
-    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        User user = (User) headerAccessor.getSessionAttributes().get("sender");
-
-        var foundUser = userRepository.findById(user.getId());
-        if(foundUser.isPresent()) {
-            log.info("User disconnected: {}", foundUser.get().getEmail());
-            var chatMessage = ChatMessage.builder()
-                    .type(MessageType.LEAVE)
-                    .sender(foundUser.get())
-                    .timestamp(LocalDateTime.now())
-                    .build();
-//            var chatMessage = new ChatMessage("", username, MessageType.LEAVER);
-            messageTemplate.convertAndSend("/topic/public", chatMessage);
-        }
-    }
-}
+//@Component
+//@RequiredArgsConstructor
+//@Slf4j
+//public class WebSocketEventListener {
+//    private final SimpMessageSendingOperations messageTemplate;
+//    private final UserRepository userRepository;
+//
+//    @EventListener
+//    public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+//        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+//        User user = (User) headerAccessor.getSessionAttributes().get("sender");
+//
+//        var foundUser = userRepository.findById(user.getId());
+//        if(foundUser.isPresent()) {
+//            log.info("User disconnected: {}", foundUser.get().getEmail());
+//            var chatMessage = ChatMessage.builder()
+//                    .type(MessageType.LEAVE)
+//                    .sender(foundUser.get())
+//                    .timestamp(LocalDateTime.now())
+//                    .build();
+////            var chatMessage = new ChatMessage("", username, MessageType.LEAVER);
+//            messageTemplate.convertAndSend("/topic/public", chatMessage);
+//        }
+//    }
+//}

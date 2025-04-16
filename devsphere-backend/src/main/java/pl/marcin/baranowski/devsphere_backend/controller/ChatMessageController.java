@@ -16,7 +16,7 @@ import java.security.Principal;
 public class ChatMessageController {
     private final ChatMessageService chatMessageService;
 
-    @MessageMapping("/chat")
+    @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessageDto dto, Principal principal) {
         return chatMessageService.sendMessage(dto, principal.getName());

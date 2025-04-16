@@ -52,6 +52,4 @@ public class SecurityConfig {
 //                .httpBasic(withDefaults()); // Ustawia HTTP Basic Authentication jako metodę uwierzytelnienia
         return http.build(); // Buduje obiekt SecurityFilterChain na podstawie danej konfiguracji
     }
-
-
 }

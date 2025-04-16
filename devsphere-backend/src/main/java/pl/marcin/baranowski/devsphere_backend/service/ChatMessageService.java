@@ -21,6 +21,7 @@ public class ChatMessageService {
     private final UserRepository userRepository;
 
     public ChatMessage sendMessage(ChatMessageDto dto, String username) {
+        System.out.println("Dostałem się");
         User sender = userRepository.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("Sender not found"));
 
@@ -34,7 +35,7 @@ public class ChatMessageService {
         return chatMessageRepository.save(message);
     }
 
-//    public List<ChatMessage> getMessages(Long userId) {
-//        return chatMessageRepository.findBySenderIdOrReceiverId(userId, userId);
+//    public List<ChatMessage> getAllMessages() {
+//        return chatMessageRepository.findAll();
 //    }
 }
