@@ -1,17 +1,17 @@
 package pl.marcin.baranowski.devsphere_backend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import pl.marcin.baranowski.devsphere_backend.dto.ChatMessageDto;
+import pl.marcin.baranowski.devsphere_backend.dto.ChatMessageRequestDto;
 import pl.marcin.baranowski.devsphere_backend.model.ChatMessage;
-import pl.marcin.baranowski.devsphere_backend.model.MessageType;
 import pl.marcin.baranowski.devsphere_backend.model.User;
 import pl.marcin.baranowski.devsphere_backend.repository.ChatMessageRepository;
 import pl.marcin.baranowski.devsphere_backend.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -19,8 +19,10 @@ import java.util.List;
 public class ChatMessageService {
     private final ChatMessageRepository chatMessageRepository;
     private final UserRepository userRepository;
+    private final ChatMessageMapper chatMessageMapper;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
-    public ChatMessage sendMessage(ChatMessageDto dto, String username) {
+    public ChatMessageDto sendMessage(ChatMessageRequestDto dto, String username) {
         System.out.println("Dostałem się");
         User sender = userRepository.findByEmail(username)
                 .orElseThrow(() -> new RuntimeException("Sender not found"));
@@ -31,11 +33,17 @@ public class ChatMessageService {
                 .type(dto.type())
                 .timestamp(LocalDateTime.now())
                 .build();
-
-        return chatMessageRepository.save(message);
+        chatMessageRepository.save(message);
+        return chatMessageMapper.toDto(message);
     }
 
-//    public List<ChatMessage> getAllMessages() {
-//        return chatMessageRepository.findAll();
-//    }
+    public List<ChatMessageDto> getAllMessages() {
+        return chatMessageRepository
+                .findAll()
+                .stream()
+                .map(chatMessageMapper::toDto)
+                .sorted(Comparator.comparing(ChatMessageDto::timestamp))
+                .toList();
+    }
+
 }
