@@ -122,6 +122,7 @@ const ProjectPage = () => {
                 <ReviewList 
                     id={id}
                     token={token.access_token}
+                    ownerId={owner.id}
                 />
                 {owner.email !== user.sub ?
                 <form className="review-input mt-2" onSubmit={addReview}>

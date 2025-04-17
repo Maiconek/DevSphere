@@ -1,5 +1,6 @@
 package pl.marcin.baranowski.devsphere_backend.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -75,9 +76,10 @@ public class ReviewService {
     }
 
 
+    @Transactional
     public void deleteReview(Long userId, Long projectId) {
-        ReviewId reviewId = new ReviewId(userId, projectId);
-        reviewRepository.deleteById(reviewId);
+        System.out.println("jestem");
+        reviewRepository.deleteByUserIdAndProjectId(userId, projectId);
     }
 
     public Double calculateAvgReviewScore(Long projectId) {
