@@ -13,7 +13,7 @@ const Chat = ({ username }) => {
     const [connected, setConnected] = useState(false);
     const messageAreaRef = useRef(null);
     const stompClientRef = useRef(null);
-    const { token } = useContext(AuthContext);
+    const { token, user } = useContext(AuthContext);
 
     useEffect(() => {
         if (!connected) {
@@ -50,10 +50,8 @@ const Chat = ({ username }) => {
     }, []); 
     
 
-
-    
-    
     const fetchMsg = async () => {
+        console.log("User", user)
         try {
             let response = await fetch("http://localhost:8080/msg", {
                 method: 'GET',
@@ -128,6 +126,7 @@ const Chat = ({ username }) => {
     };
 
     return (
+        <div id="chat-page">
         <div className="chat-container">
             <div className="chat-header">
                 <h2>DevSphere Public Chat</h2>
@@ -140,7 +139,12 @@ const Chat = ({ username }) => {
                     {/* <li key={index} className={msg.type === 'CHAT' ? 'chat-message' : 'event-message'}> */}
                         {/* {msg.type === 'CHAT' && ( */}
                             <>
-                                <span>{msg.userDto.firstName}</span>
+                                <img src={msg.userDto.imageUrl} className="chat-image"></img>
+                                {msg.userDto.email === user.sub ? 
+                                    <span style={{color : "#6db33f"}}>Me</span>
+                                    :
+                                    <span>{msg.userDto.firstName}</span>
+                                }
                             </>
                         {/* )} */}
                         {/* <p>
@@ -168,6 +172,7 @@ const Chat = ({ username }) => {
                     </div>
                 </div>
             </form>
+        </div>
         </div>
     );
 };

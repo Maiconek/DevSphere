@@ -105,18 +105,19 @@ button.accent {
 }
 
 .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 30px auto 0;
     background-color: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-    margin-top: 30px;
-    height: calc(100% - 60px);
-    max-height: 600px;
+    max-height: 630px;
     position: relative;
 }
 
-#chat-page ul {
+
+/* #chat-page ul {
     list-style-type: none;
     background-color: #FFF;
     margin: 0;
@@ -124,7 +125,7 @@ button.accent {
     overflow-y: scroll;
     padding: 0 20px 0px 20px;
     height: calc(100% - 150px);
-}
+} */
 
 #chat-page #messageForm {
     padding: 20px;
@@ -153,10 +154,10 @@ button.accent {
     word-wrap: break-word;
 }
 
-#chat-page .chat-message {
+/* #chat-page .chat-message {
     padding-left: 68px;
     position: relative;
-}
+} */
 
 #chat-page .chat-message i {
     position: absolute;
@@ -182,6 +183,7 @@ button.accent {
 
 #chat-page .chat-message p {
     color: #43464b;
+    margin-top: 5px;
 }
 
 #messageForm .input-group input {
@@ -197,14 +199,21 @@ button.accent {
 }
 
 .chat-header {
-    text-align: center;
     padding: 15px;
     border-bottom: 1px solid #ececec;
+    text-align: center;
+    flex-shrink: 0;
 }
-
 .chat-header h2 {
     margin: 0;
     font-weight: 500;
+}
+
+.chat-image {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-right: 5px;
 }
 
 .connecting {
@@ -216,6 +225,40 @@ button.accent {
     width: 100%;
 }
 
+#messageArea {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px 20px;
+    background-color: #fff;
+    list-style-type: none;
+    margin: 0;
+}
+
+#messageArea li {
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+
+#messageForm {
+    padding: 20px;
+    flex-shrink: 0;
+    border-top: 1px solid #f4f4f4;
+    background: #fff;
+}
+
+#messageForm .input-group input {
+    float: left;
+    width: calc(100% - 85px);
+}
+
+#messageForm .input-group button {
+    float: left;
+    width: 80px;
+    height: 38px;
+    margin-left: 5px;
+}
 
 @media screen and (max-width: 730px) {
 
