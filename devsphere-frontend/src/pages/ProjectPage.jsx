@@ -6,10 +6,11 @@ import ReviewList from "../components/ReviewList";
 
 const ProjectPage = () => {
 
-    const {token, user} = useContext(AuthContext)
+    const {token, user, loggedInUser} = useContext(AuthContext)
     const [project, setProject] = useState('')
     const [owner, setOwner] = useState('')
     const [score, setScore] = useState('')
+    const [ifReviewed, setIfReviewed] = useState(false)
     const params = useParams()
     const id = params.id
 
@@ -17,7 +18,9 @@ const ProjectPage = () => {
         getSingleProject()
         getAvgScore()
         getProjectOwner()
+        checkIfUserAlreadyReviewedProject()
     }, [])
+
 
     const getSingleProject = async () => {
         try {
@@ -92,6 +95,22 @@ const ProjectPage = () => {
         }
     }
 
+    const checkIfUserAlreadyReviewedProject = async () => {
+        try {
+            let response = await fetch(`http://localhost:8080/api/v1/reviews/did-user-reviewed-project/${user.sub}/${id}`, {
+                method: 'GET',
+                'headers': {
+                    'Authorization': "Bearer " + token.access_token,
+                }
+            })
+            let data = await response.text()
+            setIfReviewed(data)
+        }
+        catch (error) {
+            console.error("Blad polaczenia:" , error)
+        }
+    }
+
   
     return (
         <div className="project-container">
@@ -124,7 +143,7 @@ const ProjectPage = () => {
                     token={token.access_token}
                     ownerId={owner.id}
                 />
-                {owner.email !== user.sub ?
+                {owner.email !== user.sub  && !ifReviewed ?
                 <form className="review-input mt-2" onSubmit={addReview}>
                     <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
                     <input className="form-control mt-2" name="score" type="number" placeholder="Rate the project between 0-5"></input>

@@ -16,6 +16,7 @@ import pl.marcin.baranowski.devsphere_backend.repository.ReviewRepository;
 import pl.marcin.baranowski.devsphere_backend.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +74,14 @@ public class ReviewService {
                 .build();
 
         return reviewRepository.save(review);
+    }
+
+    public boolean checkIfUserAlreadyReviewedProject(Long projectId, String email) {
+        User user =  userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User does not exist"));
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("Project does not exist"));
+        return reviewRepository.existsByUserAndProject(user, project);
     }
 
 

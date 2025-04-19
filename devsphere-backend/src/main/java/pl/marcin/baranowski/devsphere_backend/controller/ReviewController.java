@@ -43,4 +43,9 @@ public class ReviewController {
     public Double getAvgReviewScore(@PathVariable Long projectId) {
         return reviewService.calculateAvgReviewScore(projectId);
     }
+
+    @GetMapping("/reviews/did-user-reviewed-project/{email}/{projectId}")
+    public boolean checkIfUserAlreadyReviewedProject(@PathVariable String email, @PathVariable Long projectId) {
+        return reviewService.checkIfUserAlreadyReviewedProject(projectId, email);
+    }
 }

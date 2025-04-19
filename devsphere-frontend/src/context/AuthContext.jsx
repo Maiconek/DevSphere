@@ -147,14 +147,14 @@ export const AuthProvider = ({ children }) => {
         if (token) {
             // const decodedToken = jwtDecode(token.access_token);
             // setUser(decodedToken);
-            console.log("User", user)
+            // console.log("User", user)
             // console.log("Detail", user.sub)
         }
     }, [token]); 
     
 
     return (
-        <AuthContext.Provider value={{ user, registerUser, loginUser, logoutUser, token, refreshToken }}>
+        <AuthContext.Provider value={{ user, registerUser, loginUser, logoutUser, token, refreshToken, loggedInUser }}>
             {children}
         </AuthContext.Provider>
     );
