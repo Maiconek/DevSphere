@@ -16,10 +16,10 @@ public class DevsphereBackendApplication {
 		SpringApplication.run(DevsphereBackendApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository,
-											   ProjectTagRepository projectTagRepository) {
-		return args -> {
+//	@Bean
+//	public CommandLineRunner commandLineRunner(ProjectRepository projectRepository,
+//											   ProjectTagRepository projectTagRepository) {
+//		return args -> {
 //
 //			var tag = ProjectTag.builder()
 //					.name("Python")
@@ -124,26 +124,26 @@ public class DevsphereBackendApplication {
 //					.name("Neo4j")
 //					.build();
 //			projectTagRepository.save(tag25);
-			var tag26 = ProjectTag.builder()
-					.name("Docker")
-					.build();
-			projectTagRepository.save(tag26);
-			var tag27 = ProjectTag.builder()
-					.name("Kubernetes")
-					.build();
-			projectTagRepository.save(tag27);
-			var tag28 = ProjectTag.builder()
-					.name("AWS")
-					.build();
-			projectTagRepository.save(tag28);
-			var tag29 = ProjectTag.builder()
-					.name("Figma")
-					.build();
-			projectTagRepository.save(tag29);
-			var tag30 = ProjectTag.builder()
-					.name("Jenkins")
-					.build();
-			projectTagRepository.save(tag30);
-		};
-	}
+//			var tag26 = ProjectTag.builder()
+//					.name("Docker")
+//					.build();
+//			projectTagRepository.save(tag26);
+//			var tag27 = ProjectTag.builder()
+//					.name("Kubernetes")
+//					.build();
+//			projectTagRepository.save(tag27);
+//			var tag28 = ProjectTag.builder()
+//					.name("AWS")
+//					.build();
+//			projectTagRepository.save(tag28);
+//			var tag29 = ProjectTag.builder()
+//					.name("Figma")
+//					.build();
+//			projectTagRepository.save(tag29);
+//			var tag30 = ProjectTag.builder()
+//					.name("Jenkins")
+//					.build();
+//			projectTagRepository.save(tag30);
+//		};
+//	}
 }

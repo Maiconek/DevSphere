@@ -6,7 +6,7 @@ import ReviewList from "../components/ReviewList";
 
 const ProjectPage = () => {
 
-    const {token, user, loggedInUser} = useContext(AuthContext)
+    const {token, user} = useContext(AuthContext)
     const [project, setProject] = useState('')
     const [owner, setOwner] = useState('')
     const [score, setScore] = useState('')
@@ -20,7 +20,6 @@ const ProjectPage = () => {
         getProjectOwner()
         checkIfUserAlreadyReviewedProject()
     }, [])
-
 
     const getSingleProject = async () => {
         try {
@@ -104,7 +103,9 @@ const ProjectPage = () => {
                 }
             })
             let data = await response.text()
-            setIfReviewed(data)
+            console.log(data)
+            setIfReviewed(data === "true");
+
         }
         catch (error) {
             console.error("Blad polaczenia:" , error)
@@ -143,7 +144,7 @@ const ProjectPage = () => {
                     token={token.access_token}
                     ownerId={owner.id}
                 />
-                {owner.email !== user.sub  && ifReviewed ?
+                {owner.email !== user.sub  && !ifReviewed ? 
                 <form className="review-input mt-2" onSubmit={addReview}>
                     <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
                     <input className="form-control mt-2" name="score" type="number" placeholder="Rate the project between 0-5"></input>
