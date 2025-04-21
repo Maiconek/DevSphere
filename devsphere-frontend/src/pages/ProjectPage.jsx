@@ -117,12 +117,12 @@ const ProjectPage = () => {
             <div className="project-info">
                 <img src={project.imageUrl} className="project-image"></img>
                 <h1>{project.title}</h1>
-                <p>Link to source code:</p>
-                <p>link</p>
+                <p>Link to project/source code:</p>
+                <a href={project.link} className="mt-0">{project.link}</a>
                 <div className="d-flex flex-column align-items-center">
                     <h2>Average score:</h2>
-                    <h3>{score}/5</h3>
-                    <h3>Used technologies:</h3>
+                    <h3 className="mt-0">{score}/5</h3>
+                    <h3 className="mt-0">Used technologies:</h3>
                     <div className="d-flex flex-row justify-content-center">
                         {project.tags && project.tags.map((item, index) => (
                             <p key={index} className="badge bg-secondary mt-2 me-2">{item.name}</p>
@@ -143,7 +143,7 @@ const ProjectPage = () => {
                     token={token.access_token}
                     ownerId={owner.id}
                 />
-                {owner.email !== user.sub  && !ifReviewed ?
+                {owner.email !== user.sub  && ifReviewed ?
                 <form className="review-input mt-2" onSubmit={addReview}>
                     <textarea className="form-control" name="content" aria-label="With textarea" placeholder="Type your review..."></textarea>
                     <input className="form-control mt-2" name="score" type="number" placeholder="Rate the project between 0-5"></input>

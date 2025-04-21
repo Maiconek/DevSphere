@@ -40,10 +40,20 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Token> tokens;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<Project> projects;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 //    @JsonBackReference("user-reviews")
     @JsonIgnore
     private List<Review> reviews;
+
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.REMOVE)
+    private List<ChatMessage> messages;
 
     @Override
     @JsonIgnore

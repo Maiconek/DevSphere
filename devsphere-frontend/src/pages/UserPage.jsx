@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Table from "../components/Table";
 
 const UserPage = () => {
@@ -9,6 +9,7 @@ const UserPage = () => {
     const {token, user} = useContext(AuthContext)
     const params = useParams()
     const id = params.id
+    const navigate = useNavigate()
 
     useEffect(() => {
         getSingleUser()
@@ -66,6 +67,25 @@ const UserPage = () => {
         }
     }
 
+    const deleteUser = async () => {
+        try {
+            let response = await fetch(`http://localhost:8080/api/v1/users/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': "Bearer " + token.access_token 
+                }
+            })
+            if(response.ok) {
+                localStorage.removeItem('authToken')
+                navigate('/login')
+            }
+        }
+        catch (error) {
+            console.error("Blad polaczenia ", error)
+        }
+    }
+    
+
     return (
         <div className="profile-container bg-light">
             <div className="profile-info">
@@ -79,9 +99,12 @@ const UserPage = () => {
                 }
                 
                 {searchedUser.email === user.sub ?
+                <>
                 <Link to={`/users/edit/${searchedUser.id}`}>
                     <button type="button" className="btn btn-primary me-2">Edit profile</button>
                 </Link>
+                <button type="button" className="btn btn-danger mt-2 me-2" onClick={deleteUser}>Delete profile</button>
+                </>
                 :
                 <></>
             }

@@ -46,7 +46,7 @@ public class Project {
     @JsonIgnoreProperties("projects")
     private List<ProjectTag> tags;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
 //    @JsonBackReference("project-reviews"
     @JsonIgnore
     private List<Review> reviews;

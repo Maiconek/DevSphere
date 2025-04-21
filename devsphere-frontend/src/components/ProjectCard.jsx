@@ -8,7 +8,7 @@ const ProjectCard = (props) => {
             <Link to={`/project/${props.id}`} className="text-decoration-none">
                 <div className="card" key={props.id}>
                     {props.image && (
-                        <img src={props.image} className="card-image-top" alt="image"/>
+                        <img src={props.image} className="card-image-top image-size-project" alt="image"/>
                     )}
                     <div className="card-body">
                         <h5 className="card-title">{props.title}</h5>

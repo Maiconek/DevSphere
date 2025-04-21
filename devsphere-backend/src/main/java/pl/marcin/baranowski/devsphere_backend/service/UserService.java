@@ -60,4 +60,8 @@ public class UserService {
         return userMapper.toUserDto(
                 userRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User does not exist")));
     }
+
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }
