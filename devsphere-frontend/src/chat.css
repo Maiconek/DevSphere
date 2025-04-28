@@ -214,6 +214,7 @@ button.accent {
     height: 42px;
     border-radius: 50%;
     margin-right: 5px;
+    object-fit: cover;
 }
 
 .connecting {

@@ -125,6 +125,12 @@ const Chat = ({ username }) => {
         }
     };
 
+    // Funkcja do sprawdzania, czy tekst jest linkiem
+    const isLink = (text) => {
+        const urlPattern = /^(https?:\/\/[^\s]+)$/;
+        return urlPattern.test(text);
+    };
+
     return (
         <div id="chat-page">
         <div className="chat-container">
@@ -147,12 +153,15 @@ const Chat = ({ username }) => {
                                 }
                             </>
                         {/* )} */}
-                        {/* <p>
-                            {msg.type === 'JOIN' ? `${msg.sender} joined!` :
-                             msg.type === 'LEAVE' ? `${msg.sender} left!` :
-                             msg.content}
-                        </p> */}
-                        <p>{msg.content}</p>
+                        <p>
+                        {isLink(msg.content) ? (
+                            <a href={msg.content} target="_blank" rel="noopener noreferrer">
+                                {msg.content}
+                            </a>
+                        ) : (
+                            msg.content
+                        )}
+                    </p>
                     </li>
                 ))}
             </ul>

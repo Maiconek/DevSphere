@@ -153,3 +153,16 @@ nav {
   border-radius: 50%;
   object-fit: cover; /* Zapewnia, że obraz będzie przycięty do okrągłego kształtu */
 }
+
+.social-icon {
+  width: 10%;
+  height: 10%;
+  object-fit:contain;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  gap: 10px;
+}
